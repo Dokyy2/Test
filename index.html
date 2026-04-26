@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>عيادة دكتورة دعاء - Premium Hybrid UI</title>
+<title>عيادة دكتورة دعاء - Ultra Premium UI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <style>
-/* 1. الإعدادات العامة والخلفية الكريستالية */
+:root { 
+    --primary-color: #ec4899; 
+    --dark-pink: #be185d; 
+    --silk-bg: #ffffff;
+    --silk-border: linear-gradient(135deg, #fce7f3 0%, #fff 50%, #fce7f3 100%);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+
 body {
     margin: 0;
     font-family: 'Cairo', sans-serif;
-    /* ضبط الارتفاع ليكون ديناميكي بالمللي */
-    height: 100vh;
-    height: 100dvh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* التوسيط الرأسي */
-    align-items: center; /* التوسيط الأفقي */
+    height: 100vh; height: 100dvh; 
+    display: flex; justify-content: center; align-items: center;
     background: #fff;
     background-image:
         radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%),
@@ -26,97 +30,72 @@ body {
     overflow: hidden;
 }
 
-/* 2. حاوية التطبيق - التعديل الجوهري هنا للتوازن البصري */
+/* 1. تكبير الصندوق لتقليل المساحة الخلفية (98%) */
 .app {
-    width: 92%; /* ترك مساحة بسيطة يميناً ويساراً للشياكة */
-    max-width: 400px;
-    /* الارتفاع هنا يضمن التوازن */
-    height: 94%; 
-    max-height: 850px; /* أقصى ارتفاع لضمان عدم التمدد المشوه */
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 50px; 
-    box-shadow: 0 30px 70px rgba(0,0,0,0.08);
-    border: 1px solid rgba(252, 231, 243, 0.5);
+    width: 98%; 
+    max-width: 450px;
+    height: 98%; 
+    display: flex; flex-direction: column;
+    background: var(--silk-bg);
+    border-radius: 40px; /* تقليل بسيط للانحناء ليناسب الحجم الأكبر */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    position: relative;
     overflow: hidden;
+    border: 1.5px solid transparent;
+    background-image: linear-gradient(var(--silk-bg), var(--silk-bg)), var(--silk-border);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+/* السلايدر العلوي */
+.header-slider {
+    width: 100%;
+    height: 200px; /* زيادة الطول قليلاً للتناسب مع العرض الجديد */
+    flex-shrink: 0;
     position: relative;
 }
 
-/* 3. الهيدر */
-.header { 
-    padding: 18px 15px; 
-    text-align: center; 
-    font-weight: 700; 
-    background: white; 
-    border-bottom: 1px solid #f1f5f9; 
-    color: #be185d; 
-    font-size: 1.1rem;
-    flex-shrink: 0;
+.swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+.slide-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    color: white; text-align: center;
 }
 
-/* 4. منطقة المحتوى */
-.main-content { 
-    flex: 1; 
-    overflow-y: auto; 
-    padding: 10px 0;
-    scrollbar-width: none; 
-}
+.main-content { flex: 1; overflow-y: auto; padding: 15px 0; scrollbar-width: none; }
 .main-content::-webkit-scrollbar { display: none; }
 
-/* 5. البانر */
 .banner {
-    margin: 15px 15px 20px 15px;
-    padding: 22px 15px; 
-    border-radius: 28px; 
-    color: #be185d; 
-    font-weight: 700; 
-    text-align: center;
+    margin: 10px 15px 20px 15px; padding: 25px 15px; border-radius: 25px; 
+    color: var(--dark-pink); font-weight: 700; text-align: center;
     border: 1.5px solid transparent;
-    background: linear-gradient(white,white) padding-box, linear-gradient(135deg,#fce7f3,#fff,#fce7f3) border-box;
-    box-shadow: 0 10px 25px rgba(236,72,153,0.05);
-    line-height: 1.7;
+    background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
+    box-shadow: 0 10px 20px rgba(236,72,153,0.05);
 }
 
-/* 6. الكروت */
-.cards { 
-    padding: 0 15px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 15px; 
-}
-
+.cards { padding: 0 15px; display: flex; flex-direction: column; gap: 15px; }
 .card {
-    padding: 20px; 
-    border-radius: 30px; 
-    border: 1.5px solid transparent;
-    background: linear-gradient(white,white) padding-box, linear-gradient(135deg,#fce7f3,#fff,#fce7f3) border-box;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+    padding: 22px; border-radius: 28px; border: 1.5px solid transparent;
+    background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
 }
 
-.title { font-weight: 700; margin-bottom: 5px; color: #334155; font-size: 1rem; }
-.desc { font-size: 0.85rem; color: #64748b; margin-bottom: 12px; line-height: 1.4; }
+.title { font-weight: 700; color: #334155; font-size: 1.05rem; margin-bottom: 5px; }
+.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 15px; }
 
-/* 7. الأزرار */
 .btn {
-    width: 100%; 
-    padding: 12px; 
-    border-radius: 18px; 
-    border: none; 
-    font-weight: 700; 
-    color: white;
-    background: linear-gradient(135deg,#ec4899,#be185d);
-    box-shadow: 0 5px 15px rgba(236,72,153,0.2);
-    cursor: pointer;
-    font-family: 'Cairo';
+    width: 100%; padding: 14px; border-radius: 18px; border: none; font-weight: 700; 
+    color: white; background: linear-gradient(135deg,#ec4899,#be185d);
+    box-shadow: 0 5px 15px rgba(236,72,153,0.25); cursor: pointer; font-family: 'Cairo';
 }
 
-/* 8. شريط الأيقونات السفلي - متوازن تماماً */
+/* 2. شريط الأيقونات مفرود لآخر اليمين واليسار */
 .social-nav {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between; /* فرد الأيقونات للآخر */
     align-items: center;
-    padding: 12px 10px 15px 10px; 
+    padding: 15px 25px 20px 25px; /* زيادة الهامش الداخلي الجانبي للتوازن */
     background: #ffffff;
     border-top: 1px solid #f1f5f9;
     flex-shrink: 0;
@@ -124,63 +103,54 @@ body {
 
 .social-item {
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
+    display: flex; align-items: center; justify-content: center;
+    width: 45px; height: 45px;
 }
 
-.social-item img {
-    width: 24px;
-    height: 24px;
-    filter: contrast(1.1);
-}
+.social-item img { width: 26px; height: 26px; transition: 0.3s; }
+.social-item:hover { transform: translateY(-5px); }
 
 .wa-special img {
-    width: 32px; 
-    height: 32px;
+    width: 34px; height: 34px;
     animation: wa-glow 2s infinite ease-in-out;
 }
 
 @keyframes wa-glow {
     0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(37, 211, 102, 0.2)); }
-    50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(37, 211, 102, 0.5)); }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="app">
-
-    <div class="header">👶 عيادة دكتورة دعاء</div>
+    <div class="header-slider swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600" alt="عيادة دكتورة دعاء">
+                <div class="slide-overlay"><p style="margin:0; font-weight:700;">👶 عيادة دكتورة دعاء شعبان</p></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=600" alt="أحدث الأجهزة">
+                <div class="slide-overlay"><p style="margin:0; font-weight:700;">🔬 أحدث التقنيات الطبية</p></div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
 
     <div class="main-content">
-        
-        <div class="banner">
-            ✨ أحدث الأجهزة الطبية<br>
-            📅 احجزي بسهولة واطمني
-        </div>
-
+        <div class="banner">✨ رعاية طبية متميزة<br>📅 احجزي واطمني على صحتك</div>
         <div class="cards">
             <div class="card">
                 <div class="title">📅 حجز ميعاد</div>
-                <div class="desc">اختاري نوع الكشف واحنا نحددلك أقرب موعد</div>
+                <div class="desc">اختاري نوع الكشف واحنا نحددلك الموعد</div>
                 <button class="btn">ابدئي الحجز</button>
             </div>
-
             <div class="card">
                 <div class="title">🤰 احسبي عمر حملك</div>
-                <div class="desc">نتيجة فورية + موعد الولادة المتوقع</div>
+                <div class="desc">نتيجة فورية وموعد الولادة المتوقع</div>
                 <button class="btn">احسبي الآن</button>
-            </div>
-
-            <div class="card">
-                <div class="title">🎁 عروض وخدمات</div>
-                <div class="desc">اكتشفي أحدث العروض المتاحة الآن</div>
-                <button class="btn">شوفي العروض</button>
             </div>
         </div>
     </div>
@@ -192,8 +162,15 @@ body {
         <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
         <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
-
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper', {
+        loop: true,
+        autoplay: { delay: 4000 },
+        pagination: { el: '.swiper-pagination', clickable: true },
+    });
+</script>
 </body>
 </html>
