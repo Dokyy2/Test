@@ -1,161 +1,384 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>عيادة دكتورة دعاء - Ultra Premium UI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>المساعد الذكي - عيادة دكتورة دعاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. ثوابت التصميم الـ Premium --- */
+        :root { 
+            --primary-color: #ec4899; 
+            --dark-pink: #be185d; 
+            --medical-blue: rgb(0, 160, 196); 
+            --silk-bg: #ffffff;
+            --silk-border: linear-gradient(135deg, #fce7f3 0%, #fff 50%, #fce7f3 100%);
+            --glass-bg: rgba(255, 255, 255, 0.98);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
 
-<style>
-:root { 
-    --primary-color: #ec4899; 
-    --medical-blue: rgb(0, 160, 196); 
-    --silk-bg: #ffffff;
-    --silk-border: linear-gradient(135deg, #fce7f3 0%, #fff 50%, #fce7f3 100%);
-}
+        body {
+            margin: 0; direction: rtl; font-family: 'Cairo', sans-serif;
+            height: 100dvh; display: flex; justify-content: center; align-items: center;
+            /* خلفية Liquid متدرجة */
+            background: #fff;
+            background-image:
+                radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%),
+                radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
+            overflow: hidden;
+        }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        /* --- 2. حاوية المساعد (Silk Style) --- */
+        .app-container {
+            width: 98%; max-width: 450px; height: 98%; 
+            background: var(--silk-bg); border-radius: 40px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            position: relative; overflow: hidden;
+            /* Silk Border */
+            border: 1.5px solid transparent;
+            background-image: linear-gradient(var(--silk-bg), var(--silk-bg)), var(--silk-border);
+            background-origin: border-box; background-clip: content-box, border-box;
+        }
 
-body {
-    margin: 0; font-family: 'Cairo', sans-serif;
-    height: 100dvh; display: flex; justify-content: center; align-items: center;
-    background-image: radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%), radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
-    overflow: hidden;
-}
+        /* --- 3. الهيدر والشريط العلوي --- */
+        .header { 
+            padding: 15px; text-align: center; font-weight: 700; background: white; 
+            border-bottom: 1px solid #fce7f3; color: var(--dark-pink); font-size: 1rem; 
+        }
 
-.app {
-    width: 98%; max-width: 450px; height: 98%; 
-    display: flex; flex-direction: column;
-    background: var(--silk-bg); border-radius: 40px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    position: relative; overflow: hidden;
-    border: 1.5px solid transparent;
-    background-image: linear-gradient(var(--silk-bg), var(--silk-bg)), var(--silk-border);
-    background-origin: border-box; background-clip: content-box, border-box;
-}
+        .social-bar { 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 10px 20px; background: #fffbff; border-bottom: 1px solid #fce7f3; 
+        }
+        
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a img { width: 28px; height: 28px; transition: 0.3s; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05)); }
+        
+        .home-btn { 
+            background: var(--medical-blue); color: white; border: none; padding: 6px 14px; 
+            border-radius: 12px; font-weight: 700; cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0, 160, 196, 0.2); 
+        }
 
-/* 🌟 تظبيط المقاس ليتناسب مع الصورة 1200x600 (نسبة 2:1) */
-.header-slider { 
-    width: 100%; 
-    aspect-ratio: 2 / 1; /* يضمن التناسب التام مع مقاس 1200x600 */
-    flex-shrink: 0; 
-    position: relative; 
-    overflow: hidden; 
-}
+        /* --- 4. منطقة المحادثة --- */
+        .chat-area { 
+            flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; 
+            gap: 15px; scrollbar-width: none; background: rgba(255,255,255,0.3);
+        }
+        .chat-area::-webkit-scrollbar { display: none; }
 
-.swiper-slide img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; /* لملء المساحة بالكامل بنعومة */
-}
+        .msg { 
+            max-width: 90%; padding: 14px 18px; border-radius: 22px; font-size: 0.95rem; 
+            line-height: 1.6; animation: slideIn 0.4s ease; position: relative;
+        }
+        
+        .bot-msg { 
+            background: white; align-self: flex-start; color: #334155; 
+            border: 1px solid #fce7f3; box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            border-bottom-right-radius: 4px;
+        }
+        
+        .user-msg { 
+            background: linear-gradient(135deg, var(--medical-blue), #008eb0); 
+            color: white; align-self: flex-end; border-bottom-left-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 160, 196, 0.2);
+        }
 
-.main-content { flex: 1; overflow-y: auto; padding: 10px 0; scrollbar-width: none; }
-.main-content::-webkit-scrollbar { display: none; }
+        /* --- 5. العناصر التفاعلية (Buttons & Forms) --- */
+        .welcome-box { 
+            border: 2px solid var(--dark-pink); border-radius: 18px; padding: 12px; 
+            background: #fff0f6; color: var(--dark-pink); font-weight: 700; 
+            margin-bottom: 10px; font-size: 0.85rem; text-align: center;
+        }
 
-.banner {
-    margin: 10px 15px 15px 15px; padding: 20px 15px; border-radius: 25px; 
-    color: #be185d; font-weight: 700; text-align: center;
-    border: 1.5px solid transparent;
-    background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
-    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.05);
-}
+        .option-btn { 
+            background: white; border: 1.5px solid #fbcfe8; color: var(--dark-pink); 
+            padding: 12px; margin: 6px 0; border-radius: 15px; cursor: pointer; 
+            width: 100%; font-weight: 700; font-family: 'Cairo'; transition: 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+        .option-btn:hover:not(:disabled) { background: #fff0f6; transform: translateY(-2px); border-color: var(--primary-color); }
+        .option-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.cards { padding: 0 15px; display: flex; flex-direction: column; gap: 15px; }
-.card {
-    padding: 20px; border-radius: 28px; border: 1.5px solid transparent;
-    background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-}
+        .booking-form { 
+            background: #fff; border: 2px solid var(--medical-blue); 
+            border-radius: 25px; padding: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .booking-form input, .booking-form select { 
+            width: 100%; margin: 10px 0; padding: 12px; border-radius: 12px; 
+            border: 1px solid #eee; font-family: 'Cairo'; text-align: center; font-size: 0.9rem;
+        }
 
-.title { font-weight: 700; color: #334155; font-size: 1.05rem; margin-bottom: 5px; }
-.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; }
+        .info-red-glow { color: #dc2626; font-weight: 800; display: block; margin: 10px 0; text-align: center; }
 
-.btn {
-    width: 100%; padding: 14px; border-radius: 18px; border: none; font-weight: 700; 
-    color: white; background: linear-gradient(135deg, var(--medical-blue), #008eb0);
-    box-shadow: 0 5px 15px rgba(0, 160, 196, 0.3); cursor: pointer; font-family: 'Cairo';
-    transition: all 0.3s ease;
-}
-.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 160, 196, 0.5); }
-.btn:active { transform: scale(0.96); }
+        /* حاسبة الحمل المتوهجة */
+        .pregnancy-result {
+            width: 100%; background: linear-gradient(135deg, #fff0f6, #ffe4ec);
+            border-radius: 25px; padding: 20px; text-align: center;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+            animation: glowPulse 2.5s infinite ease-in-out;
+        }
+        .main-number { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); }
+        .delivery-date { 
+            margin-top: 15px; padding: 12px; background: white; border-radius: 15px; 
+            border: 2px solid var(--primary-color); color: var(--dark-pink); font-weight: 700; 
+        }
 
-.social-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 15px 25px 15px; background: #ffffff;
-    border-top: 1px solid #f1f5f9; flex-shrink: 0;
-}
+        @keyframes glowPulse { 
+            0%, 100% { box-shadow: 0 0 10px rgba(236,72,153,0.2); transform: scale(1); } 
+            50% { box-shadow: 0 0 25px rgba(236,72,153,0.5); transform: scale(1.02); } 
+        }
 
-.social-item {
-    text-decoration: none; display: flex; align-items: center; justify-content: center;
-    width: 55px; height: 55px; transition: 0.3s;
-}
+        .premium-wa-link { 
+            display: block; text-decoration: none; padding: 15px; border-radius: 15px; 
+            text-align: center; font-weight: 800; background: #dc2626; color: white; 
+            animation: flash 1s infinite; margin-top: 10px;
+        }
 
-.social-item img { width: 32px; height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-.social-item:hover { transform: translateY(-5px); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes flash { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
-.wa-special img {
-    width: 45px; height: 45px;
-    filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4));
-    animation: wa-glow 2s infinite ease-in-out;
-}
+        /* لودينج النقاط */
+        .typing { display: flex; gap: 5px; padding: 12px 20px; align-self: flex-start; }
+        .dot { width: 7px; height: 7px; background: var(--primary-color); border-radius: 50%; animation: blink 1.4s infinite; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-@keyframes wa-glow {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.3)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); }
-}
-</style>
+    </style>
 </head>
-
 <body>
 
-<div class="app">
-    <div class="header-slider swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="https://i.ibb.co/xq78ZD0G/resized-1200x600.png" alt="بانر عيادة دكتورة دعاء">
-            </div>
-            <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200" alt="أحدث الأجهزة">
-            </div>
+<div class="app-container">
+    <div class="header">👶 المساعد الذكي - عيادة دكتورة دعاء</div>
+    
+    <div class="social-bar">
+        <div class="social-icons">
+            <a href="https://wa.me/201125337717"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+            <a href="https://www.facebook.com/drdoaashaban"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+            <a href="https://www.instagram.com/dr_doaa_shaban"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+            <a href="https://www.tiktok.com/@doaaobgyn"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
         </div>
-        <div class="swiper-pagination"></div>
+        <button class="home-btn" onclick="location.reload()">🏠</button>
     </div>
 
-    <div class="main-content">
-        <div class="banner">✨ رعاية طبية متكاملة لراحتكِ ولطفلكِ<br>📅 احجزي واطمني باستخدام أحدث الأجهزة</div>
-        <div class="cards">
-            <div class="card">
-                <div class="title">📅 حجز ميعاد</div>
-                <div class="desc">اختاري نوع الكشف واحنا نحددلك الموعد</div>
-                <button class="btn">ابدئي الحجز</button>
-            </div>
-            <div class="card">
-                <div class="title">🤰 احسبي عمر حملك</div>
-                <div class="desc">نتيجة فورية وموعد الولادة المتوقع بدقة</div>
-                <button class="btn">احسبي الآن</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="social-nav">
-        <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
-        <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-        <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
-        <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-    </div>
+    <div id="chatArea" class="chat-area"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    const swiper = new Swiper('.swiper', {
-        loop: true,
-        autoplay: { delay: 4000 },
-        pagination: { el: '.swiper-pagination', clickable: true },
-    });
-    function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFOTDH7ZVGBmxYXi4l517vM5S3sAH4fL2XjPDfKIQ-rnOyAAnBjTDmNjYIWYocghvh/exec";
+
+function getWelcomeMessage() {
+    return `
+    <div class="welcome-box">
+        📅 يتم تحديد موعد الحجز بدايةً من اليوم التالي حسب أولوية الحجز.<br>
+        وفي حال كان اليوم التالي عطلة أو اكتمل العدد، يتم الحجز في أقرب يوم متاح.
+    </div>
+    👋 <b style="color:var(--dark-pink);">أهلاً بيكِ في عيادتنا</b><br>
+    أنا <span style="color:var(--primary-color); font-weight:700;">مساعدكِ الذكي</span> 🤍 هكون معاكي علشان أسهّل عليكِ الحجز والاستفسار:
+    <div style="margin-top:10px;">
+        <button class="option-btn" onclick="showBookingOptions(this)">📅 احجزيلي ميعاد</button>
+        <button class="option-btn" onclick="quickSend('حاسبة الحمل', this)">🤰 احسبي عمر حملكِ</button>
+        <button class="option-btn" onclick="quickSend('عن المساعد الذكي', this)">✨ عن المساعد الذكي</button>
+    </div>`;
+}
+
+// --- دوال التحكم في المحادثة ---
+
+function showBookingOptions(btn) {
+    if(btn) freezeButtons(btn); 
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        addMessage(`📋 <b style="color:var(--dark-pink);">من فضلكِ اختاري نوع الكشف:</b><br>
+        <div style="margin-top:10px;">
+            <button class="option-btn" onclick="renderForm('first', this)">💖 كشف نساء أول مرة</button>
+            <button class="option-btn" onclick="renderForm('follow', this)">🔄 كشف نساء متابعة</button>
+            <button class="option-btn" onclick="renderForm('consult', this)">📝 كشف نساء "استشارة"</button>
+            <button class="option-btn" onclick="renderForm('birth', this)">👶 حجز ولادة</button>
+        </div>`, "bot");
+    }, 600);
+}
+
+function renderForm(type, btn) {
+    if(btn) freezeButtons(btn);
+    const today = new Date().toISOString().split('T')[0];
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        let fields = "";
+        const baseFields = `
+            <input type="text" id="pName" placeholder="👤 اسمكِ الثلاثي بالكامل" oninput="this.value=this.value.replace(/[^\\u0600-\\u06FF\\s]/g,''); checkNameInput(this)">
+            <div id="nameErr" style="color:red; font-size:0.7rem; display:none;">⚠️ يرجى كتابة الاسم ثلاثي</div>
+            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم)" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,''); checkPhoneInput(this)">
+            <div id="phoneErr" style="color:red; font-size:0.7rem; display:none;">⚠️ الرقم غير صحيح</div>
+        `;
+        const note = `<span class="info-red-glow">سيتم تحديد الموعد تلقائياً<br>والحجز يبدأ من غدٍ</span>`;
+
+        if (type === 'first') {
+            fields = `<b>📋 بيانات حجز كشف أول مرة</b>${baseFields}
+                <select id="pSource" onchange="toggleOther(this.value)">
+                    <option value="">✨ عرفتينا منين؟</option>
+                    <option value="فيسبوك">🔵 فيسبوك</option>
+                    <option value="تيك توك">⚫ تيك توك</option>
+                    <option value="صديقة">👭 صديقة</option>
+                    <option value="انستغرام">📸 انستغرام</option>
+                    <option value="أخرى">🔍 مكان تانى</option>
+                </select>
+                <div id="otherArea"></div>${note}
+                <button class="option-btn" style="background:var(--medical-blue); color:white; border:none;" onclick="validateAndSubmit('كشف أول مرة')">تأكيد الحجز الآن ✅</button>`;
+        } else if (type === 'follow' || type === 'consult') {
+            const title = (type === 'follow') ? 'متابعة' : 'استشارة';
+            fields = `<b>🔄 حجز ${title}</b>${baseFields}
+                <p style="font-size:0.8rem; margin:5px 0;">📅 تاريخ آخر زيارة للعيادة:</p>
+                <input type="date" id="pLastVisit" max="${today}" onchange="check15Days(this, '${type}')">
+                <div id="dateFeedback" style="font-size:0.8rem; margin-bottom:10px;"></div>
+                ${note}<button id="subBtn" class="option-btn" style="background:var(--medical-blue); color:white; border:none;" onclick="validateAndSubmit('${title}')">تأكيد الحجز ✅</button>`;
+        } else if (type === 'birth') {
+            addMessage(`✨ <b>طلب حجز ولادة</b><br>يسعدنا جداً مرافقتكِ في هذه اللحظة المميزة 🤍<br><br><a href="https://wa.me/201125337717" class="premium-wa-link" style="background:#25D366; animation:none;">💬 واتساب حجز الولادة</a>`, "bot");
+            return;
+        }
+        addMessage(`<div class="booking-form" id="activeForm">${fields}</div>`, "bot");
+    }, 600);
+}
+
+function freezeButtons(btn) {
+    const parent = btn.parentElement;
+    const buttons = parent.querySelectorAll('button');
+    buttons.forEach(b => { b.disabled = true; if (b !== btn) b.style.opacity = "0.3"; });
+}
+
+function checkNameInput(el) { document.getElementById("nameErr").style.display = el.value.trim().split(/\s+/).length < 3 ? "block" : "none"; }
+function checkPhoneInput(el) { document.getElementById("phoneErr").style.display = el.value.length < 11 ? "block" : "none"; }
+function toggleOther(v) { document.getElementById("otherArea").innerHTML = v === 'أخرى' ? `<input type="text" id="pOther" placeholder="عرفتينا منين...">` : ""; }
+
+function check15Days(el, type) {
+    if (type !== 'consult') return;
+    const diff = Math.floor((new Date() - new Date(el.value)) / (1000 * 60 * 60 * 24));
+    const fb = document.getElementById("dateFeedback");
+    const btn = document.getElementById("subBtn");
+    if (diff > 15) {
+        fb.innerHTML = `<span style="color:red;">⚠️ تجاوزتِ 15 يوماً (استشارة منتهية)</span>`;
+        btn.style.display = 'none';
+        fb.innerHTML += `<button class="option-btn" onclick="location.reload()">📅 حجز كشف جديد</button>`;
+    } else {
+        fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام للاستشارة.</span>`;
+        btn.style.display = 'block';
+    }
+}
+
+function validateAndSubmit(bookingType) {
+    const name = document.getElementById("pName").value.trim();
+    const phone = document.getElementById("pPhone").value;
+    const source = document.getElementById("pSource")?.value || "";
+    const other = document.getElementById("pOther")?.value || "";
+    const lastVisit = document.getElementById("pLastVisit")?.value || "";
+
+    if (name.split(/\s+/).length < 3 || phone.length < 11) { alert("يرجى إدخال البيانات كاملة 👤📱"); return; }
+    
+    document.getElementById("activeForm").style.opacity = "0.5";
+    document.getElementById("activeForm").style.pointerEvents = "none";
+    showTyping();
+
+    const payload = { name, phone, type: bookingType, lastVisit, source: source === 'أخرى' ? other : source };
+
+    fetch(SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) })
+    .then(res => res.json())
+    .then(response => {
+        removeTyping();
+        if(response.status === "success") { finishProcess(payload, response); }
+        else { 
+            addMessage(`⚠️ ${response.message}`, "bot"); 
+            document.getElementById("activeForm").style.opacity = "1";
+            document.getElementById("activeForm").style.pointerEvents = "auto";
+        }
+    }).catch(() => { removeTyping(); alert("خطأ في الاتصال."); });
+}
+
+function finishProcess(data, res) {
+    addMessage(`
+    <div class="pregnancy-result" style="background:white; border:2px solid var(--medical-blue); animation:none;">
+        <b style="color:var(--medical-blue); font-size:1.1rem;">🎉 تم تسجيل الحجز بنجاح</b><br><br>
+        <div style="text-align:right; font-size:0.85rem; line-height:1.8;">
+            📌 الرقم: <b>${res.id}</b><br>
+            🩺 النوع: <b>${res.type}</b><br>
+            📅 اليوم: <b>${res.date}</b><br>
+            ⏰ الحضور: <b>${res.time}</b>
+        </div>
+        <div style="color:red; font-size:0.75rem; margin-top:10px; font-weight:700;">يرجى الحضور قبل الموعد بـ 15 دقيقة</div>
+    </div>`, "bot");
+
+    const waMsg = `*تأكيد حجز جديد*\n📌 الرقم: ${res.id}\n🩺 النوع: ${res.type}\n👤 الاسم: ${data.name}\n📱 الهاتف: ${data.phone}\n📅 اليوم: ${res.date}\n⏰ الحضور: ${res.time}`;
+    const waUrl = `https://wa.me/201125337717?text=${encodeURIComponent(waMsg)}`;
+    addMessage(`<a href="${waUrl}" target="_blank" class="premium-wa-link">اضغطي هنا لتأكيد الحجز عبر واتساب</a>`, "bot");
+}
+
+function quickSend(text, btn) {
+    if(btn) freezeButtons(btn);
+    addMessage(text, "user");
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        if (text.includes('حمل')) {
+            addMessage(`
+            <div class="booking-form" style="border-style: dashed;">
+                <b>🤰 حاسبة عمر الحمل</b><br>
+                أول يوم لآخر دورة شهرية:<br>
+                <input type="date" id="lp" max="${new Date().toISOString().split('T')[0]}">
+                <button class="option-btn" style="background:var(--primary-color); color:white; border:none;" onclick="doCalc(this)">احسبي الآن ✨</button>
+            </div>`, "bot");
+        } else {
+            addMessage(`أنا مساعدكِ الرقمي، متوفرة لخدمتكِ طوال اليوم 🤍<br><button class="option-btn" onclick="location.reload()">ابدأ حجز جديد</button>`, "bot");
+        }
+    }, 600);
+}
+
+function doCalc(btn) {
+    const d = document.getElementById("lp").value;
+    if (!d) return alert("اختاري التاريخ 📅");
+    btn.disabled = true;
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        const diff = new Date() - new Date(d);
+        const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(totalDays / 7);
+        const days = totalDays % 7;
+        const deliveryDate = new Date(d); deliveryDate.setDate(deliveryDate.getDate() + 280);
+
+        addMessage(`
+        <div class="pregnancy-result">
+            ✨ أنتِ الآن في:<br><div class="main-number">${weeks} أسبوع و ${days} يوم</div>
+            <div class="delivery-date">📅 موعد الولادة المتوقع:<br>${deliveryDate.toLocaleDateString('ar-EG')}</div>
+        </div>`, "bot");
+    }, 1000);
+}
+
+function addMessage(t, type) {
+    const c = document.getElementById("chatArea");
+    const d = document.createElement("div");
+    d.className = "msg " + (type === "user" ? "user-msg" : "bot-msg");
+    d.innerHTML = t;
+    c.appendChild(d);
+    c.scrollTop = c.scrollHeight;
+}
+
+function showTyping() {
+    const d = document.createElement("div"); d.id = "typing";
+    d.className = "msg bot-msg typing";
+    d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    document.getElementById("chatArea").appendChild(d);
+    document.getElementById("chatArea").scrollTop = document.getElementById("chatArea").scrollHeight;
+}
+
+function removeTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
+
+window.onload = () => {
+    showTyping();
+    setTimeout(() => { removeTyping(); addMessage(getWelcomeMessage(), "bot"); }, 1000);
+};
 </script>
 </body>
 </html>
