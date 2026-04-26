@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <style>
-/* ... الإعدادات العامة والخلفية الكريستالية (Silk & Liquid) ... */
 :root { 
     --primary-color: #ec4899; 
     --dark-pink: #be185d; 
@@ -45,27 +44,11 @@ body {
     background-clip: content-box, border-box;
 }
 
-/* تكبير ارتفاع السلايدر العلوي لإظهار تفاصيل الصورة الجديدة */
-.header-slider { 
-    width: 100%; 
-    height: 240px; 
-    flex-shrink: 0; 
-    position: relative; 
-    overflow: hidden; 
-}
-
-/* 🌟 تعديل جوهري لإظهار كامل الصورة بوضوح تام */
-.swiper-slide img { 
-    width: 100%; 
-    height: 100%; 
-    /* contain: تضمن ظهور كامل الصورة داخل الإطار دون قص */
-    object-fit: contain; 
-    /* خلفية بيضاء لملاءمة الصورة في حال كانت أنحف من الإطار */
-    background-color: white; 
-}
+.header-slider { width: 100%; height: 200px; flex-shrink: 0; position: relative; overflow: hidden; }
+.swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
 
 .slide-overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 25px 20px;
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
     background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
     color: white; text-align: center;
 }
@@ -78,7 +61,7 @@ body {
     color: var(--dark-pink); font-weight: 700; text-align: center;
     border: 1.5px solid transparent;
     background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
-    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.05);
+    box-shadow: 0 10px 20px rgba(236,72,153,0.05);
 }
 
 .cards { padding: 0 15px; display: flex; flex-direction: column; gap: 15px; }
@@ -97,24 +80,37 @@ body {
     box-shadow: 0 5px 15px rgba(236,72,153,0.25); cursor: pointer; font-family: 'Cairo';
 }
 
+/* 🌟 شريط الأيقونات المطور بمقاسات كبيرة */
 .social-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 15px 25px 15px; background: #ffffff;
-    border-top: 1px solid #f1f5f9; flex-shrink: 0;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 15px 25px 15px; 
+    background: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    flex-shrink: 0;
 }
 
 .social-item {
-    text-decoration: none; display: flex; align-items: center; justify-content: center;
-    width: 55px; height: 55px; transition: 0.3s;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+    /* تكبير مساحة اللمس للأصابع الكبيرة */
+    width: 55px; height: 55px;
+    transition: 0.3s;
 }
 
+/* تكبير الأيقونات العادية */
 .social-item img { 
-    width: 32px; height: 32px; transition: 0.3s; 
+    width: 32px; /* كانت 26 */
+    height: 32px; 
+    transition: 0.3s; 
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
+/* تمييز الواتساب ليكون الأكبر والأوضح */
 .wa-special img {
-    width: 45px; height: 45px;
+    width: 45px; /* مقاس ملكي واضح جداً */
+    height: 45px;
     filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4));
     animation: wa-glow 2s infinite ease-in-out;
 }
@@ -124,7 +120,10 @@ body {
     50% { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); }
 }
 
-.social-item:active { transform: scale(0.85); filter: brightness(1.3); }
+.social-item:active { 
+    transform: scale(0.85); 
+    filter: brightness(1.3);
+}
 </style>
 </head>
 
@@ -134,7 +133,7 @@ body {
     <div class="header-slider swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="https://scontent-hbe1-2.xx.fbcdn.net/v/t39.30808-6/676916321_937480659104609_1540530107019091943_n.png?_nc_cat=103&ccb=1-7&_nc_sid=2a1932&_nc_ohc=9kwmgL7zDfAQ7kNvwENQZc6&_nc_oc=AdqR_wLAhwOp8JuSUU0UOp74qkEop3ysGlZKMbxmyAb_f8WTMKbgdQquQS50BJrj5bw&_nc_zt=23&_nc_ht=scontent-hbe1-2.xx&_nc_gid=G0Zms1CTL0vqRmDGn9Kkbw&_nc_ss=7b2a8&oh=00_Af31Pn5112-Zo5SQgwKrfWVV2a0t6vXSwekUSeswPAvofg&oe=69F4371B" alt="عيادة دكتورة دعاء">
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600" alt="العيادة">
                 <div class="slide-overlay"><p style="margin:0; font-weight:700;">👶 عيادة دكتورة دعاء شعبان</p></div>
             </div>
             <div class="swiper-slide">
@@ -167,23 +166,40 @@ body {
     </div>
 
     <div class="social-nav">
-        <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
-        <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-        <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
-        <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+        <a href="https://instagram.com" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+        </a>
+        <a href="https://facebook.com" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
+        <a href="#" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share">
+        </a>
+        <a href="https://tiktok.com" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
+        </a>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+    // تفعيل السلايدر
     const swiper = new Swiper('.swiper', {
         loop: true,
         autoplay: { delay: 4000 },
         pagination: { el: '.swiper-pagination', clickable: true },
     });
 
-    function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
+    // دالة الاهتزاز المطورة
+    function handleVibrate() {
+        if ("vibrate" in navigator) {
+            // اهتزاز قصير وقوي
+            navigator.vibrate(60); 
+        }
+    }
 </script>
 </body>
 </html>
