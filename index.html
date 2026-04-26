@@ -30,14 +30,13 @@ body {
     overflow: hidden;
 }
 
-/* 1. تكبير الصندوق لتقليل المساحة الخلفية (98%) */
 .app {
     width: 98%; 
     max-width: 450px;
     height: 98%; 
     display: flex; flex-direction: column;
     background: var(--silk-bg);
-    border-radius: 40px; /* تقليل بسيط للانحناء ليناسب الحجم الأكبر */
+    border-radius: 40px; 
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
     position: relative;
     overflow: hidden;
@@ -47,10 +46,9 @@ body {
     background-clip: content-box, border-box;
 }
 
-/* السلايدر العلوي */
 .header-slider {
     width: 100%;
-    height: 200px; /* زيادة الطول قليلاً للتناسب مع العرض الجديد */
+    height: 200px; 
     flex-shrink: 0;
     position: relative;
 }
@@ -90,12 +88,12 @@ body {
     box-shadow: 0 5px 15px rgba(236,72,153,0.25); cursor: pointer; font-family: 'Cairo';
 }
 
-/* 2. شريط الأيقونات مفرود لآخر اليمين واليسار */
+/* --- تعديل شريط الأيقونات والأحجام الجديدة --- */
 .social-nav {
     display: flex;
-    justify-content: space-between; /* فرد الأيقونات للآخر */
+    justify-content: space-between; 
     align-items: center;
-    padding: 15px 25px 20px 25px; /* زيادة الهامش الداخلي الجانبي للتوازن */
+    padding: 15px 25px 20px 25px; 
     background: #ffffff;
     border-top: 1px solid #f1f5f9;
     flex-shrink: 0;
@@ -104,20 +102,30 @@ body {
 .social-item {
     text-decoration: none;
     display: flex; align-items: center; justify-content: center;
-    width: 45px; height: 45px;
+    width: 55px; height: 55px; /* تكبير منطقة اللمس */
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.social-item img { width: 26px; height: 26px; transition: 0.3s; }
+.social-item img { 
+    width: 30px; height: 30px; /* تكبير الأيقونات العادية */
+    transition: 0.3s; 
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+}
+
 .social-item:hover { transform: translateY(-5px); }
+.social-item:active { transform: scale(0.9); }
 
+/* --- تمييز الواتساب المطور --- */
 .wa-special img {
-    width: 34px; height: 34px;
-    animation: wa-glow 2s infinite ease-in-out;
+    width: 42px !important; /* تكبير الواتساب بشكل ملحوظ */
+    height: 42px !important;
+    filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4));
+    animation: wa-glow-premium 2s infinite ease-in-out;
 }
 
-@keyframes wa-glow {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(37, 211, 102, 0.2)); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(37, 211, 102, 0.5)); }
+@keyframes wa-glow-premium {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(37, 211, 102, 0.3)); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); }
 }
 </style>
 </head>
@@ -158,8 +166,14 @@ body {
     <div class="social-nav">
         <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
         <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="if(navigator.vibrate) navigator.vibrate(50);"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-        <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
+        
+        <a href="https://wa.me/201125337717" 
+           class="social-item wa-special" 
+           onclick="handleVibrate()">
+           <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        </a>
+        
+        <a href="#" class="social-item" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
         <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
 </div>
@@ -171,6 +185,14 @@ body {
         autoplay: { delay: 4000 },
         pagination: { el: '.swiper-pagination', clickable: true },
     });
+
+    // دالة الاهتزاز المحسنة
+    function handleVibrate() {
+        if ("vibrate" in navigator) {
+            // نمط اهتزاز (50 ملي ثانية)
+            navigator.vibrate(50);
+        }
+    }
 </script>
 </body>
 </html>
