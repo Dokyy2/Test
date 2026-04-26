@@ -88,12 +88,12 @@ body {
     box-shadow: 0 5px 15px rgba(236,72,153,0.25); cursor: pointer; font-family: 'Cairo';
 }
 
-/* --- تعديل شريط الأيقونات والأحجام الجديدة --- */
+/* --- 🌟 شريط الأيقونات بنظام "المسطرة الهندسية" --- */
 .social-nav {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between; /* فرد الأيقونات من الحافة للحافة */
     align-items: center;
-    padding: 15px 25px 20px 25px; 
+    padding: 15px 15px 25px 15px; /* الـ 15px الجانبية هي الـ "مل" اللي يحمي الأيقونة من الحافة */
     background: #ffffff;
     border-top: 1px solid #f1f5f9;
     flex-shrink: 0;
@@ -102,30 +102,32 @@ body {
 .social-item {
     text-decoration: none;
     display: flex; align-items: center; justify-content: center;
-    width: 55px; height: 55px; /* تكبير منطقة اللمس */
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* مساحة لمس متساوية للكل */
+    flex: 1; 
 }
 
+/* الأيقونات العادية مقاس 32px */
 .social-item img { 
-    width: 30px; height: 30px; /* تكبير الأيقونات العادية */
-    transition: 0.3s; 
+    width: 32px; 
+    height: 32px; 
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
 }
 
-.social-item:hover { transform: translateY(-5px); }
-.social-item:active { transform: scale(0.9); }
-
-/* --- تمييز الواتساب المطور --- */
+/* تمييز الواتساب بمقاس 48px */
 .wa-special img {
-    width: 42px !important; /* تكبير الواتساب بشكل ملحوظ */
-    height: 42px !important;
-    filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4));
-    animation: wa-glow-premium 2s infinite ease-in-out;
+    width: 48px !important; 
+    height: 48px !important;
+    filter: drop-shadow(0 0 12px rgba(37, 211, 102, 0.45));
+    animation: wa-glow-ultra 2s infinite ease-in-out;
 }
 
-@keyframes wa-glow-premium {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(37, 211, 102, 0.3)); }
-    50% { transform: scale(1.15); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); }
+.social-item:hover { transform: translateY(-5px); }
+.social-item:active { transform: scale(0.85); }
+
+@keyframes wa-glow-ultra {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(37, 211, 102, 0.3)); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(37, 211, 102, 0.6)); }
 }
 </style>
 </head>
@@ -165,15 +167,15 @@ body {
 
     <div class="social-nav">
         <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+        
         <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
         
-        <a href="https://wa.me/201125337717" 
-           class="social-item wa-special" 
-           onclick="handleVibrate()">
+        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()">
            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
         </a>
         
         <a href="#" class="social-item" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
+        
         <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
 </div>
@@ -186,10 +188,8 @@ body {
         pagination: { el: '.swiper-pagination', clickable: true },
     });
 
-    // دالة الاهتزاز المحسنة
     function handleVibrate() {
         if ("vibrate" in navigator) {
-            // نمط اهتزاز (50 ملي ثانية)
             navigator.vibrate(50);
         }
     }
