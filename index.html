@@ -11,8 +11,7 @@
 <style>
 :root { 
     --primary-color: #ec4899; 
-    --dark-pink: #be185d; 
-    --medical-blue: rgb(0, 160, 196); /* اللون المطلوب */
+    --medical-blue: rgb(0, 160, 196); 
     --silk-bg: #ffffff;
     --silk-border: linear-gradient(135deg, #fce7f3 0%, #fff 50%, #fce7f3 100%);
 }
@@ -20,116 +19,84 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
 
 body {
-    margin: 0;
-    font-family: 'Cairo', sans-serif;
-    height: 100vh; height: 100dvh; 
-    display: flex; justify-content: center; align-items: center;
-    background: #fff;
-    background-image:
-        radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%),
-        radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
+    margin: 0; font-family: 'Cairo', sans-serif;
+    height: 100dvh; display: flex; justify-content: center; align-items: center;
+    background-image: radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%), radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
     overflow: hidden;
 }
 
 .app {
     width: 98%; max-width: 450px; height: 98%; 
     display: flex; flex-direction: column;
-    background: var(--silk-bg);
-    border-radius: 40px;
+    background: var(--silk-bg); border-radius: 40px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     border: 1.5px solid transparent;
     background-image: linear-gradient(var(--silk-bg), var(--silk-bg)), var(--silk-border);
-    background-origin: border-box;
-    background-clip: content-box, border-box;
+    background-origin: border-box; background-clip: content-box, border-box;
 }
 
-.header-slider { width: 100%; height: 200px; flex-shrink: 0; position: relative; overflow: hidden; }
-.swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-
-.slide-overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-    color: white; text-align: center;
+/* 🌟 تظبيط المقاس ليتناسب مع الصورة 1200x600 (نسبة 2:1) */
+.header-slider { 
+    width: 100%; 
+    aspect-ratio: 2 / 1; /* يضمن التناسب التام مع مقاس 1200x600 */
+    flex-shrink: 0; 
+    position: relative; 
+    overflow: hidden; 
 }
 
-.main-content { flex: 1; overflow-y: auto; padding: 15px 0; scrollbar-width: none; }
+.swiper-slide img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* لملء المساحة بالكامل بنعومة */
+}
+
+.main-content { flex: 1; overflow-y: auto; padding: 10px 0; scrollbar-width: none; }
 .main-content::-webkit-scrollbar { display: none; }
 
 .banner {
-    margin: 10px 15px 20px 15px; padding: 25px 15px; border-radius: 25px; 
-    color: var(--dark-pink); font-weight: 700; text-align: center;
+    margin: 10px 15px 15px 15px; padding: 20px 15px; border-radius: 25px; 
+    color: #be185d; font-weight: 700; text-align: center;
     border: 1.5px solid transparent;
     background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
-    box-shadow: 0 10px 20px rgba(236,72,153,0.05);
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.05);
 }
 
 .cards { padding: 0 15px; display: flex; flex-direction: column; gap: 15px; }
 .card {
-    padding: 22px; border-radius: 28px; border: 1.5px solid transparent;
+    padding: 20px; border-radius: 28px; border: 1.5px solid transparent;
     background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
     box-shadow: 0 8px 20px rgba(0,0,0,0.03);
 }
 
 .title { font-weight: 700; color: #334155; font-size: 1.05rem; margin-bottom: 5px; }
-.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 15px; }
+.desc { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; }
 
-/* 🌟 الأزرار بتأثير الهافر واللون اللبني الجديد */
 .btn {
-    width: 100%; 
-    padding: 14px; 
-    border-radius: 18px; 
-    border: none; 
-    font-weight: 700; 
-    color: white; 
-    background: linear-gradient(135deg, var(--medical-blue), #008eb0);
-    box-shadow: 0 5px 15px rgba(0, 160, 196, 0.3); 
-    cursor: pointer; 
-    font-family: 'Cairo';
-    transition: all 0.3s ease; /* سرعة الحركة */
+    width: 100%; padding: 14px; border-radius: 18px; border: none; font-weight: 700; 
+    color: white; background: linear-gradient(135deg, var(--medical-blue), #008eb0);
+    box-shadow: 0 5px 15px rgba(0, 160, 196, 0.3); cursor: pointer; font-family: 'Cairo';
+    transition: all 0.3s ease;
 }
-
-/* تأثير عند مرور الماوس أو اللمس المطول */
-.btn:hover {
-    transform: translateY(-3px); /* بيطلع لفوق خفيف */
-    box-shadow: 0 8px 20px rgba(0, 160, 196, 0.5); /* نور أو Glow */
-    filter: brightness(1.1);
-}
-
-/* تأثير عند الضغط الفعلي */
-.btn:active {
-    transform: scale(0.96); /* بيكش خفيف */
-    box-shadow: 0 2px 10px rgba(0, 160, 196, 0.4);
-}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 160, 196, 0.5); }
+.btn:active { transform: scale(0.96); }
 
 .social-nav {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 15px 25px 15px; 
-    background: #ffffff;
-    border-top: 1px solid #f1f5f9;
-    flex-shrink: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 15px 25px 15px; background: #ffffff;
+    border-top: 1px solid #f1f5f9; flex-shrink: 0;
 }
 
 .social-item {
-    text-decoration: none;
-    display: flex; align-items: center; justify-content: center;
-    width: 55px; height: 55px;
-    transition: 0.3s;
+    text-decoration: none; display: flex; align-items: center; justify-content: center;
+    width: 55px; height: 55px; transition: 0.3s;
 }
 
-.social-item img { 
-    width: 32px; 
-    height: 32px; 
-    transition: 0.3s; 
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
+.social-item img { width: 32px; height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+.social-item:hover { transform: translateY(-5px); }
 
 .wa-special img {
-    width: 45px; 
-    height: 45px;
+    width: 45px; height: 45px;
     filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4));
     animation: wa-glow 2s infinite ease-in-out;
 }
@@ -137,11 +104,6 @@ body {
 @keyframes wa-glow {
     0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.3)); }
     50% { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); }
-}
-
-.social-item:active { 
-    transform: scale(0.85); 
-    filter: brightness(1.3);
 }
 </style>
 </head>
@@ -152,19 +114,17 @@ body {
     <div class="header-slider swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600" alt="العيادة">
-                <div class="slide-overlay"><p style="margin:0; font-weight:700;">👶 عيادة دكتورة دعاء شعبان</p></div>
+                <img src="https://i.ibb.co/xq78ZD0G/resized-1200x600.png" alt="بانر عيادة دكتورة دعاء">
             </div>
             <div class="swiper-slide">
-                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=600" alt="الأجهزة">
-                <div class="slide-overlay"><p style="margin:0; font-weight:700;">🔬 أحدث التقنيات الطبية</p></div>
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200" alt="أحدث الأجهزة">
             </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>
 
     <div class="main-content">
-        <div class="banner">✨ رعاية طبية متميزة<br>📅 احجزي واطمني على صحتك</div>
+        <div class="banner">✨ رعاية طبية متكاملة لراحتكِ ولطفلكِ<br>📅 احجزي واطمني باستخدام أحدث الأجهزة</div>
         <div class="cards">
             <div class="card">
                 <div class="title">📅 حجز ميعاد</div>
@@ -173,33 +133,18 @@ body {
             </div>
             <div class="card">
                 <div class="title">🤰 احسبي عمر حملك</div>
-                <div class="desc">نتيجة فورية وموعد الولادة المتوقع</div>
+                <div class="desc">نتيجة فورية وموعد الولادة المتوقع بدقة</div>
                 <button class="btn">احسبي الآن</button>
-            </div>
-            <div class="card">
-                <div class="title">🎁 عروض وخدمات</div>
-                <div class="desc">اكتشفي أحدث العروض والخصومات</div>
-                <button class="btn">شوفي العروض</button>
             </div>
         </div>
     </div>
 
     <div class="social-nav">
-        <a href="https://instagram.com" class="social-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        </a>
-        <a href="https://facebook.com" class="social-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-        </a>
-        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </a>
-        <a href="#" class="social-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share">
-        </a>
-        <a href="https://tiktok.com" class="social-item">
-            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-        </a>
+        <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+        <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+        <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png" alt="Share"></a>
+        <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
 </div>
 
@@ -210,12 +155,7 @@ body {
         autoplay: { delay: 4000 },
         pagination: { el: '.swiper-pagination', clickable: true },
     });
-
-    function handleVibrate() {
-        if ("vibrate" in navigator) {
-            navigator.vibrate(60); 
-        }
-    }
+    function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
 </script>
 </body>
 </html>
