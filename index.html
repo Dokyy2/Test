@@ -50,12 +50,10 @@ body {
     opacity: 0; transition: opacity 1s ease;
 }
 
-/* حاوية الهيدر لتحديد موقع السهم */
 .header-container { width: 100%; position: relative; flex-shrink: 0; }
 .header-slider { width: 100%; aspect-ratio: 2 / 1; overflow: hidden; }
 .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
 
-/* --- تعديل: سهم العودة جوة البانر من تحت --- */
 .back-btn {
     width: 42px; height: 42px; border-radius: 12px;
     background: rgba(255, 255, 255, 0.85); border: 1.5px solid var(--medical-blue);
@@ -224,9 +222,9 @@ function renderForm(type) {
         setTimeout(() => {
             removeTyping();
             addMessage(`
-            <div class="spiritual-glow">✨ طلب حجز ولادة  ✨</div>
-            <br><b style="font-size:1.1rem; color:var(--medical-blue);">يسعدنا جداً أن نرافقكِ في هذه اللحظة السعيدة والمميزة 🤱 🤍</b><br><br>
-            نحن هنا لضمان راحتكِ وأمان طفلكِ بأعلى مستويات الرعاية الطبيّة .<br><br>
+            <div class="spiritual-glow">✨ طلب حجز ولادة روحاني ✨</div>
+            <br><b style="font-size:1.1rem; color:var(--medical-blue);">يسعدنا جداً أن نرافقكِ في هذه اللحظة المباركة والمميزة 🤱 🤍</b><br><br>
+            نحن هنا لضمان راحتكِ وأمان طفلكِ بأعلى مستويات الرعاية الطبيّة والروحية الصادقة.<br><br>
             من فضلكِ اضغطي على الزر للتحدث مباشرة مع سكرتارية العيادة لتنسيق كافة التفاصيل:<br>
             <a href="https://wa.me/201125337717" class="option-btn green" style="text-decoration:none; display:block; margin-top:20px;">💬 واتساب حجز الولادة الآن</a>
             `);
@@ -242,10 +240,10 @@ function renderForm(type) {
         const baseFields = `
             <input type="text" id="pName" placeholder="👤 اسمكِ الثلاثي بالكامل" oninput="this.value=this.value.replace(/[^\\u0600-\\u06FF\\s]/g,''); checkNameInput(this)">
             <div id="nameErr" class="error-hint">⚠️ يرجى كتابة الاسم ثلاثي بالحروف فقط</div>
-            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم) يفضل واتساب" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,''); checkPhoneInput(this)">
+            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم) يفضل واتساب" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
             <div id="phoneErr" class="error-hint">⚠️ يرجى التأكد من الرقم (11 رقم فقط)</div>
             <p style="font-size:0.85rem; margin-top:10px;">📅 اختاري اليوم المفضل للحضور:</p>
-            <input type="date" id="pBookingDate" min="${today}">
+            <input type="date" id="pBookingDate" min="${today}" onchange="checkWeekend(this)">
         `;
         if (type === 'first') {
             fields = `<b style="font-size:1.1rem; color:var(--medical-blue);">📋 بيانات حجز كشف أول مرة</b>${baseFields}
@@ -259,26 +257,40 @@ function renderForm(type) {
                 </select><div id="otherArea"></div><button class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('كشف أول مرة')">تأكيد طلب الحجز ✅</button>`;
         } else if (type === 'follow' || type === 'consult') {
             const title = (type === 'follow') ? 'متابعة' : 'استشارة';
-            // الاستشارة هي اللي فيها حساب الـ 15 يوم
-            const dateFeedbackArea = (type === 'consult') ? `<div id="dateFeedback" style="font-size:0.8rem; font-weight:700; margin-top:5px;"></div>` : "";
-            const onchangeAction = (type === 'consult') ? `onchange="check15Days(this)"` : "";
+            const extraLogic = (type === 'consult') ? `onchange="check15Days()"` : "";
             
             fields = `<b style="font-size:1.1rem; color:var(--medical-blue);">🔄 حجز ${title}</b>${baseFields}
                 <p style="font-size:0.8rem; margin:10px 0 5px 0; color:var(--dark-pink); font-weight:700;">📅 تاريخ آخر زيارة للعيادة:</p>
-                <input type="date" id="pLastVisit" max="${today}" ${onchangeAction}>
-                ${dateFeedbackArea}
+                <input type="date" id="pLastVisit" max="${today}" ${extraLogic}>
+                <div id="dateFeedback" style="font-size:0.8rem; font-weight:700; margin-top:5px;"></div>
                 <div id="submitArea"><button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('${title}')">تأكيد طلب الحجز ✅</button></div>`;
         }
         addMessage(`<div class="booking-form" id="activeForm">${fields}</div>`);
     }, 400);
 }
 
-function check15Days(el) {
-    const diff = Math.floor((new Date() - new Date(el.value)) / (1000 * 60 * 60 * 24));
+function checkWeekend(el) {
+    const date = new Date(el.value);
+    const day = date.getUTCDay(); 
+    if (day === 4 || day === 5) { // 4 هو الخميس و 5 هو الجمعة في توقيت UTC/ISO
+        alert("عذراً، العيادة مغلقة يومي الخميس والجمعة ✋ يرجى اختيار يوم آخر.");
+        el.value = "";
+    }
+    // إعادة التحقق من الاستشارة عند تغيير تاريخ الحجز أيضاً
+    if(document.getElementById("pLastVisit")) check15Days();
+}
+
+function check15Days() {
+    const lastVisitVal = document.getElementById("pLastVisit").value;
+    const bookingDateVal = document.getElementById("pBookingDate").value;
+    if(!lastVisitVal || !bookingDateVal) return;
+
+    const diff = Math.floor((new Date(bookingDateVal) - new Date(lastVisitVal)) / (1000 * 60 * 60 * 24));
     const fb = document.getElementById("dateFeedback");
     const sub = document.getElementById("submitArea");
+
     if (diff > 15) {
-        fb.innerHTML = `<span style="color:red;">⚠️ المدة تجاوزت 15 يوماً، يرجى حجز كشف جديد.</span>`;
+        fb.innerHTML = `<span style="color:red;">⚠️ المدة بين الزيارة والحجز تجاوزت 15 يوماً، يرجى حجز كشف جديد.</span>`;
         sub.innerHTML = `<button class="option-btn" onclick="renderForm('first')">📅 حجز كشف جديد</button>`;
     } else {
         fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`;
