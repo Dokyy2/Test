@@ -139,11 +139,11 @@ body {
         </div>
 
     <div class="social-nav">
-        <a href="https://instagram.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-        <a href="https://facebook.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+        <a href="https://www.instagram.com/dr_doaa_shaban/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+        <a href="https://www.facebook.com/DrdoaaShaban"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
         <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-        <a href="#" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"></a>
-        <a href="https://tiktok.com" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
+        <a href="#" class="social-item" onclick="shareApp(event)"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"></a>
+        <a href="https://www.tiktok.com/@doaaobgyn" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
     </div>
 </div>
 
@@ -156,6 +156,11 @@ const swiper = new Swiper('.swiper', {
     pagination: { el: '.swiper-pagination', clickable: true },
 });
 
+    function copyLink(url){
+    navigator.clipboard.writeText(url);
+    alert("تم نسخ لينك الحجز 📋");
+}
+    
 // --- وظيفة تحميل الصفحة الرئيسية ---
 function loadHomePage() {
     document.getElementById('backBtn').style.display = 'none';
@@ -408,6 +413,28 @@ function showTyping() {
 }
 function removeTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
 function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
+function copyLink(url){
+    navigator.clipboard.writeText(url);
+    alert("تم نسخ لينك الحجز 📋");
+}
+
+function shareApp(e){
+    e.preventDefault();
+
+    const shareData = {
+        title: "عيادة دكتورة دعاء شعبان",
+        text: "احجزي ميعادك بسهولة مع المساعد الذكي 🤍",
+        url: "https://dokyy2.github.io/DrDoaa/"
+    };
+
+    if (navigator.share) {
+        navigator.share(shareData)
+        .then(() => console.log("تمت المشاركة"))
+        .catch((err) => console.log("تم الإلغاء", err));
+    } else {
+        copyLink(shareData.url);
+    }
+}
 
 window.onload = () => { loadHomePage(); };
 </script>
