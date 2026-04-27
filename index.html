@@ -322,6 +322,8 @@ function check15Days() {
     else { fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`; sub.innerHTML = `<button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('استشارة')">تأكيد طلب الحجز ✅</button>`; }
 }
 
+// استبدل الجزء الخاص بالدالتين validateAndSubmit و finishProcess بهذا الكود بدقة:
+
 function validateAndSubmit(bookingType) {
     const name = document.getElementById("pName").value.trim();
     const phone = document.getElementById("pPhone").value;
@@ -330,11 +332,24 @@ function validateAndSubmit(bookingType) {
     const other = document.getElementById("pOther")?.value || "";
     const lastVisitEl = document.getElementById("pLastVisit");
     const lastVisit = lastVisitEl ? lastVisitEl.value : "";
-    const fileInput = document.getElementById("pFile"); // خانة الصورة
+    const fileInput = document.getElementById("pFile"); // خانة الصورة للتجميل النسائي
 
-    if ((bookingType === 'متابعة' || bookingType === 'استشارة' || bookingType === 'تجميل نسائي') && !lastVisit) { alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); return; }
-    if (name.split(/\s+/).length < 3 || phone.length < 11 || !bookingDate) { alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون وتاريخ الحجز 👤📱📅"); return; }
-    
+    // التحقق من تاريخ الزيارة في المتابعة والاستشارة والتجميل
+    if ((bookingType === 'متابعة' || bookingType === 'استشارة' || bookingType === 'تجميل نسائي') && !lastVisit) { 
+        alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); 
+        return; 
+    }
+    // التحقق من البيانات الأساسية
+    if (name.split(/\s+/).length < 3 || phone.length < 11 || !bookingDate) { 
+        alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون وتاريخ الحجز 👤📱📅"); 
+        return; 
+    }
+    // التحقق من مصدر المعرفة
+    if (bookingType === 'كشف أول مرة' || bookingType === 'تجميل نسائي') {
+        if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
+        if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
+    }
+
     document.getElementById("activeForm").style.opacity = "0.5";
     document.getElementById("activeForm").style.pointerEvents = "none";
     showTyping();
@@ -347,41 +362,45 @@ function validateAndSubmit(bookingType) {
         source: source === 'أخرى' ? other : source 
     };
 
-    // --- المنطق الجديد لإرسال الصورة ---
+    // منطق إرسال الصورة إذا وجدت
     if (fileInput && fileInput.files.length > 0) {
         const file = fileInput.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
-            payload.fileData = e.target.result.split(",")[1]; // محتوى الصورة Base64
+            payload.fileData = e.target.result.split(",")[1]; // Base64
             payload.fileName = file.name;
             payload.fileType = file.type;
             sendToDatabase(payload);
         };
         reader.readAsDataURL(file);
     } else {
-        sendToDatabase(payload); // إرسال بدون صورة
+        sendToDatabase(payload);
     }
 }
 
-// دالة وسيطة للإرسال الفعلي
 function sendToDatabase(payload) {
     fetch(SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) })
     .then(res => res.json())
     .then(response => {
         removeTyping();
         document.getElementById('contentArea').innerHTML = ''; 
-        if(response.status === "success") { finishProcess(payload, response); }
-        else if (response.status === "duplicated") {
+        if(response.status === "success") { 
+            finishProcess(payload, response); 
+        } else if (response.status === "duplicated") {
             let formattedMessage = response.message.replace(/(\d{4}-\d{2}-\d{2})|(\d{1,2}\/\d{1,2}\/\d{4})/, '<b class="data-highlight">$&</b>');
             addMessage(`<div style="text-align:center; border: 2px solid var(--medical-blue); padding: 22px; border-radius: 28px; background: #f8fafc;"><b style="font-size:1.25rem; color:var(--medical-blue); display:block; margin-bottom:15px;">⚠️ تنبيه بخصوص حجزك</b><div style="font-weight:700; line-height:2; color:#334155; font-size:1rem;">${formattedMessage}</div><br><button class="option-btn green" onclick="window.open('https://wa.me/201125337717')">💬 تواصلِ معنا للاستفسار</button><button class="option-btn" style="background:#64748b; margin-top:10px;" onclick="goHome()">🏠 العودة للرئيسية</button></div>`);
-        } else { alert("حدث خطأ: " + response.message); location.reload(); }
-    }).catch(() => { removeTyping(); alert("عذراً، حصل خطأ في الاتصال بالخادم."); });
+        } else { 
+            alert("حدث خطأ: " + response.message); 
+            location.reload(); 
+        }
+    }).catch(() => { 
+        removeTyping(); 
+        alert("عذراً، حصل خطأ في الاتصال بالخادم."); 
+    });
 }
 
 function finishProcess(data, res) {
-    // تعديل الرقم المرجعي للتجميل النسائي ليبدأ بحرف D
-    function finishProcess(data, res) {
-    let finalId = res.id; // نعتمد الـ ID القادم من السكريبت مباشرة (الذي يبدأ بـ B)
+    let finalId = res.id; // القادم من السكريبت يبدأ بـ B
     const waMsg = `*طلب حجز موعد جديد*\n📌 الرقم: ${finalId}\n🩺 النوع: ${data.type}\n👤 الاسم: ${data.name}\n📱 الهاتف: ${data.phone}\n📅 اليوم المختار: ${data.bookingDate}\n⚠️ يرجى تأكيد ساعة الحضور`;
     const waUrl = `https://wa.me/201125337717?text=${encodeURIComponent(waMsg)}`;
     addMessage(`<div style="text-align:center; border:2px solid var(--primary-color); background: linear-gradient(135deg,#fff0f6,#ffe4ec); padding:20px; border-radius:28px;"><div style="font-size:1.25rem; font-weight:800; color:#be185d; margin-bottom:12px;">🎉 تم تسجيل طلبكِ بنجاح</div><div style="text-align:right; font-size:0.95rem; line-height:2.2; color:#334155;">📌 رقمك المرجعي: <b class="data-highlight">${finalId}</b><br>🩺 نوع الكشف: <b class="data-highlight">${data.type}</b><br>📅 اليوم المختار: <b class="data-highlight">${data.bookingDate}</b></div><hr style="margin:15px 0; border-top:1.5px solid #fbcfe8;"><div style="font-size:0.85rem; color:#dc2626; font-weight:800; margin-bottom:15px;">إدارة العيادة ستتواصل معكِ لتحديد الساعة<br>يرجى تأكيد الحجز عبر واتساب الآن</div><a href="${waUrl}" target="_blank" class="premium-wa-link">اضغطي هنا لتأكيد الحجز عبر واتساب</a></div>`);
