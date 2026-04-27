@@ -330,19 +330,41 @@ function validateAndSubmit(bookingType) {
     const other = document.getElementById("pOther")?.value || "";
     const lastVisitEl = document.getElementById("pLastVisit");
     const lastVisit = lastVisitEl ? lastVisitEl.value : "";
+    const fileInput = document.getElementById("pFile"); // خانة الصورة
 
     if ((bookingType === 'متابعة' || bookingType === 'استشارة' || bookingType === 'تجميل نسائي') && !lastVisit) { alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); return; }
     if (name.split(/\s+/).length < 3 || phone.length < 11 || !bookingDate) { alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون وتاريخ الحجز 👤📱📅"); return; }
-    if (bookingType === 'كشف أول مرة' || bookingType === 'تجميل نسائي') {
-        if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
-        if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
-    }
-
+    
     document.getElementById("activeForm").style.opacity = "0.5";
     document.getElementById("activeForm").style.pointerEvents = "none";
     showTyping();
-    const payload = { name, phone, type: bookingType, bookingDate, lastVisit, source: source === 'أخرى' ? other : source, email_to: "dokyy2@gmail.com" };
-    
+
+    const payload = { 
+        name, phone, 
+        type: bookingType, 
+        bookingDate, 
+        lastVisit, 
+        source: source === 'أخرى' ? other : source 
+    };
+
+    // --- المنطق الجديد لإرسال الصورة ---
+    if (fileInput && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            payload.fileData = e.target.result.split(",")[1]; // محتوى الصورة Base64
+            payload.fileName = file.name;
+            payload.fileType = file.type;
+            sendToDatabase(payload);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        sendToDatabase(payload); // إرسال بدون صورة
+    }
+}
+
+// دالة وسيطة للإرسال الفعلي
+function sendToDatabase(payload) {
     fetch(SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) })
     .then(res => res.json())
     .then(response => {
@@ -358,7 +380,8 @@ function validateAndSubmit(bookingType) {
 
 function finishProcess(data, res) {
     // تعديل الرقم المرجعي للتجميل النسائي ليبدأ بحرف D
-    let finalId = (data.type === 'تجميل نسائي') ? 'D' + res.id : res.id;
+    function finishProcess(data, res) {
+    let finalId = res.id; // نعتمد الـ ID القادم من السكريبت مباشرة (الذي يبدأ بـ B)
     const waMsg = `*طلب حجز موعد جديد*\n📌 الرقم: ${finalId}\n🩺 النوع: ${data.type}\n👤 الاسم: ${data.name}\n📱 الهاتف: ${data.phone}\n📅 اليوم المختار: ${data.bookingDate}\n⚠️ يرجى تأكيد ساعة الحضور`;
     const waUrl = `https://wa.me/201125337717?text=${encodeURIComponent(waMsg)}`;
     addMessage(`<div style="text-align:center; border:2px solid var(--primary-color); background: linear-gradient(135deg,#fff0f6,#ffe4ec); padding:20px; border-radius:28px;"><div style="font-size:1.25rem; font-weight:800; color:#be185d; margin-bottom:12px;">🎉 تم تسجيل طلبكِ بنجاح</div><div style="text-align:right; font-size:0.95rem; line-height:2.2; color:#334155;">📌 رقمك المرجعي: <b class="data-highlight">${finalId}</b><br>🩺 نوع الكشف: <b class="data-highlight">${data.type}</b><br>📅 اليوم المختار: <b class="data-highlight">${data.bookingDate}</b></div><hr style="margin:15px 0; border-top:1.5px solid #fbcfe8;"><div style="font-size:0.85rem; color:#dc2626; font-weight:800; margin-bottom:15px;">إدارة العيادة ستتواصل معكِ لتحديد الساعة<br>يرجى تأكيد الحجز عبر واتساب الآن</div><a href="${waUrl}" target="_blank" class="premium-wa-link">اضغطي هنا لتأكيد الحجز عبر واتساب</a></div>`);
