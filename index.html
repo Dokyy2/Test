@@ -273,7 +273,7 @@ function validateAndSubmit(bookingType) {
     const other = document.getElementById("pOther")?.value || "";
     const lastVisit = document.getElementById("pLastVisit")?.value || "";
 
-    if (name.split(/\s+/).length < 3 || phone.length < 11) { alert("يرجى إدخال البيانات كاملة والاصلية ادخل اسم ورقم التليفون بطريقه صحيحه 👤📱"); return; }
+    if (name.split(/\s+/).length < 3 || phone.length < 11) { alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون بطريقه صحيحه 👤📱"); return; }
     if (bookingType === 'كشف أول مرة') {
         if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
         if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
