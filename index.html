@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>عيادة دكتورة دعاء - المنصة المتكاملة</title>
+<title>عيادة دكتورة دعاء - Ultra Premium UI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -49,7 +49,6 @@ body {
 }
 .main-content::-webkit-scrollbar { display: none; }
 
-/* سهم العودة */
 .back-btn {
     width: 45px; height: 45px; border-radius: 15px;
     background: white; border: 2px solid var(--medical-blue);
@@ -59,9 +58,8 @@ body {
 }
 .back-btn svg { width: 24px; height: 24px; fill: var(--medical-blue); }
 
-/* صناديق الصفحة الرئيسية */
 .banner {
-    margin: 0; padding: 20px 15px; border-radius: 25px; 
+    padding: 20px 15px; border-radius: 25px; 
     color: #be185d; font-weight: 700; text-align: center;
     border: 1.5px solid transparent;
     background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
@@ -75,7 +73,6 @@ body {
 .title { font-weight: 700; color: #334155; font-size: 1.05rem; margin-bottom: 5px; }
 .desc { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; }
 
-/* الأزرار السماوية */
 .option-btn, .btn {
     width: 100%; padding: 14px; border-radius: 18px; border: none; font-weight: 700; 
     color: white; background: linear-gradient(135deg, var(--medical-blue), #008eb0);
@@ -85,7 +82,6 @@ body {
 .option-btn:hover, .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 160, 196, 0.5); }
 .option-btn.green { background: linear-gradient(135deg, var(--success-green), #16a34a); box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3); }
 
-/* ستايل المساعد والحاسبة */
 .msg { 
     width: 100%; padding: 18px; border-radius: 28px; background: white; border: 1.5px solid var(--medical-blue); 
     box-shadow: 0 0 15px rgba(0, 160, 196, 0.15); text-align: center; color: #334155; font-size: 0.92rem; line-height: 1.6;
@@ -99,7 +95,6 @@ body {
 .delivery-date { margin-top: 15px; padding: 12px; background: white; border-radius: 15px; border: 2px solid var(--primary-color); color: var(--dark-pink); font-weight: 700; }
 .spiritual-glow { font-size: 1.4rem; font-weight: 800; color: var(--medical-blue); text-shadow: 0 0 15px rgba(0, 160, 196, 0.4); animation: spiritPulse 2s infinite ease-in-out; }
 
-/* شريط التواصل */
 .social-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px 25px 15px; background: #ffffff; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
 .social-item { transition: 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; }
 .social-item img { width: 32px; height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); transition: 0.3s; }
@@ -110,7 +105,6 @@ body {
 @keyframes spiritPulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.2); } }
 @keyframes wa-glow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.3)); } 50% { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 .premium-wa-link { display: block; text-decoration: none; padding: 15px; border-radius: 15px; text-align: center; font-weight: 800; background: #dc2626; color: white; animation: flash 1s infinite; margin: 10px 0; }
 @keyframes flash { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
@@ -135,12 +129,11 @@ body {
         <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
     </div>
 
-    <div id="contentArea" class="main-content">
-        </div>
+    <div id="contentArea" class="main-content"></div>
 
     <div class="social-nav">
-        <a href="https://www.instagram.com/dr_doaa_shaban/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-        <a href="https://www.facebook.com/DrdoaaShaban"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+        <a href="https://www.instagram.com/dr_doaa_shaban/" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+        <a href="https://www.facebook.com/DrdoaaShaban" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
         <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
         <a href="#" class="social-item" onclick="shareApp(event)"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"></a>
         <a href="https://www.tiktok.com/@doaaobgyn" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
@@ -156,9 +149,6 @@ const swiper = new Swiper('.swiper', {
     pagination: { el: '.swiper-pagination', clickable: true },
 });
 
-}
-    
-// --- وظيفة تحميل الصفحة الرئيسية ---
 function loadHomePage() {
     document.getElementById('backBtn').style.display = 'none';
     const content = document.getElementById('contentArea');
@@ -186,7 +176,6 @@ function loadHomePage() {
 
 function goHome() { loadHomePage(); }
 
-// --- وظائف كود الحجز (نسخة طبق الأصل) ---
 function startBooking() {
     document.getElementById('backBtn').style.display = 'flex';
     document.getElementById('contentArea').innerHTML = '';
@@ -204,8 +193,7 @@ function getWelcomeMessage() {
         وفي حال كان اليوم التالي عطلة أو اكتمل العدد، يتم الحجز في أقرب يوم متاح.
     </div>
     👋 <b style="color:var(--dark-pink);">أهلاً بيكِ في عيادتنا</b><br>
-    أنا <span style="color:var(--primary-color); font-weight:700;">مساعدكِ الذكي</span> 🤍<br>
-    هكون معاكي علشان أسهّل عليكِ الحجز والاستفسار:
+    أنا مساعدكِ الذكي 🤍 هكون معاكي علشان أسهّل عليكِ الحجز والاستفسار:
     <div class="btn-group">
         <button class="option-btn" onclick="showBookingOptions()">📅 احجزيلي ميعاد</button>
         <button class="option-btn" onclick="quickSend('عن المساعد الذكي')">✨ عن المساعد الذكي</button>
@@ -278,60 +266,22 @@ function renderForm(type) {
     }, 400);
 }
 
-function checkNameInput(el) { document.getElementById("nameErr").style.display = el.value.trim().split(/\s+/).length < 3 ? "block" : "none"; }
-function checkPhoneInput(el) { document.getElementById("phoneErr").style.display = el.value.length < 11 ? "block" : "none"; }
-function toggleOther(v) { document.getElementById("otherArea").innerHTML = v === 'أخرى' ? `<input type="text" id="pOther" placeholder="عرفتينا منين ...">` : ""; }
-
-function check15Days(el, type) {
-    if (type !== 'consult') return;
-    const diff = Math.floor((new Date() - new Date(el.value)) / (1000 * 60 * 60 * 24));
-    const fb = document.getElementById("dateFeedback");
-    const btn = document.getElementById("subBtn");
-    if (diff > 15) {
-        fb.innerHTML = `<span style="color:red;">⚠️ المدة تجاوزت 15 يوماً، يرجى حجز كشف جديد.</span><br><button class="option-btn" onclick="location.reload()">📅 حجز كشف جديد</button>`;
-        btn.style.display = 'none';
-    } else {
-        fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`;
-        btn.disabled = false; btn.style.display = 'block';
-    }
-}
-
 function validateAndSubmit(bookingType) {
     const name = document.getElementById("pName").value.trim();
     const phone = document.getElementById("pPhone").value;
     const source = document.getElementById("pSource")?.value || "";
-    const other = document.getElementById("pOther")?.value || ""; // الخانة الجديدة
+    const other = document.getElementById("pOther")?.value || "";
     const lastVisit = document.getElementById("pLastVisit")?.value || "";
 
-    // 1. التحقق من الاسم والموبايل
-    if (name.split(/\s+/).length < 3 || phone.length < 11) { 
-        alert("يرجى إدخال البيانات كاملة ادخل اسم ورقم التليفون بطريقه صحيحه 👤📱"); 
-        return; 
-    }
-    
-    // 2. التحقق من مصدر المعرفة (عرفتينا منين)
+    if (name.split(/\s+/).length < 3 || phone.length < 11) { alert("يرجى إدخال البيانات كاملة والاصلية ادخل اسم ورقم التليفون بطريقه صحيحه 👤📱"); return; }
     if (bookingType === 'كشف أول مرة') {
-        if (!source) { 
-            alert("من فضلكِ اختاري عرفتينا منين ✨"); 
-            return; 
-        }
-        // التعديل الجديد هنا: التحقق من خانة "مكان تاني"
-        if (source === 'أخرى' && other.trim() === "") { 
-            alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); 
-            return; 
-        }
+        if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
+        if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
     }
-    
-    // 3. التحقق من التاريخ للمتابعة والاستشارة
-    if ((bookingType === 'متابعة' || bookingType === 'استشارة') && !lastVisit) { 
-        alert("يرجى إدخال تاريخ آخر زيارة 📅"); 
-        return; 
-    }
+    if ((bookingType === 'متابعة' || bookingType === 'استشارة') && !lastVisit) { alert("يرجى إدخال تاريخ آخر زيارة 📅"); return; }
 
-    // إذا مر بكل الشروط، يتم الإرسال
     document.getElementById("activeForm").style.opacity = "0.5";
     document.getElementById("activeForm").style.pointerEvents = "none";
-
     showTyping();
     const payload = { name, phone, type: bookingType, lastVisit, source: source === 'أخرى' ? other : source };
     fetch(SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) })
@@ -356,7 +306,6 @@ function finishProcess(data, res) {
     setTimeout(() => { window.open(waUrl, "_blank"); }, 10000);
 }
 
-// --- وظائف كود الحاسبة (نسخة طبق الأصل) ---
 function startCalculator() {
     document.getElementById('backBtn').style.display = 'flex';
     document.getElementById('contentArea').innerHTML = '';
@@ -398,7 +347,9 @@ function quickSend(text) {
     }, 400);
 }
 
-// --- أدوات النظام ---
+function checkNameInput(el) { document.getElementById("nameErr").style.display = el.value.trim().split(/\s+/).length < 3 ? "block" : "none"; }
+function checkPhoneInput(el) { document.getElementById("phoneErr").style.display = el.value.length < 11 ? "block" : "none"; }
+function toggleOther(v) { document.getElementById("otherArea").innerHTML = v === 'أخرى' ? `<input type="text" id="pOther" placeholder="عرفتينا منين ...">` : ""; }
 function addMessage(t) { 
     const d = document.createElement("div"); d.className = "msg"; d.innerHTML = t; 
     document.getElementById("contentArea").appendChild(d); 
@@ -410,26 +361,19 @@ function showTyping() {
 }
 function removeTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
 function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
-function copyLink(url){
-    navigator.clipboard.writeText(url);
-    alert("تم نسخ لينك الحجز 📋");
-}
 
 function shareApp(e){
     e.preventDefault();
-
     const shareData = {
         title: "عيادة دكتورة دعاء شعبان",
         text: "احجزي ميعادك بسهولة مع المساعد الذكي 🤍",
         url: "https://dokyy2.github.io/DrDoaa/"
     };
-
     if (navigator.share) {
-        navigator.share(shareData)
-        .then(() => console.log("تمت المشاركة"))
-        .catch((err) => console.log("تم الإلغاء", err));
+        navigator.share(shareData).catch((err) => console.log("Error sharing", err));
     } else {
-        copyLink(shareData.url);
+        navigator.clipboard.writeText(shareData.url);
+        alert("تم نسخ رابط الحجز بنجاح 📋");
     }
 }
 
