@@ -80,7 +80,7 @@ body {
     box-shadow: 0 8px 25px rgba(121, 40, 202, 0.4) !important;
     animation: neonPulse 3s infinite alternate;
 }
-@keyframes neonPulse { from { filter: brightness(1); } to { filter: brightness(1.2); } }
+@keyframes neonGlow { from { filter: brightness(1); } to { filter: brightness(1.2); } }
 
 .msg { width: 100%; padding: 18px; border-radius: 28px; background: white; border: 1.5px solid var(--medical-blue); box-shadow: 0 0 15px rgba(0, 160, 196, 0.15); text-align: center; color: #334155; font-size: 0.92rem; line-height: 1.6; }
 .data-highlight { background: #f0f9ff; color: var(--medical-blue); padding: 2px 8px; border-radius: 8px; font-weight: 800; border: 1px solid #e0f2fe; }
@@ -148,7 +148,7 @@ body {
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwU-tB5tjuqPVCcFIPqCLsqpoHb43kSB4YEb-mEJbAEiQ0_Io3krZUgWAaGvpG-38OO/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxk8NF9xttsmDrrSPB1YkESgJ1MvI7LfQAEspjKPah7QFZtzMIkYm2MG4bfPp2EHFZI/exec";
 
 window.addEventListener('load', () => {
     setTimeout(() => {
@@ -241,8 +241,8 @@ function renderForm(type) {
         setTimeout(() => {
             removeTyping();
             addMessage(`
-            <div class="spiritual-glow">✨ طلب حجز ولادة  ✨</div>
-            <br><b style="font-size:1.1rem; color:var(--medical-blue);">يسعدنا جداً أن نرافقكِ في هذه اللحظة المباركة والمميزة 🤱 🤍</b><br><br>
+            <div class="spiritual-glow">✨ طلب حجز ولادة ✨</div>
+            <br><b style="font-size:1.1rem; color:var(--medical-blue);">يسعدنا جداً أن نرافقكِ في هذه اللحظة السعيدة والمميزة 🤱 🤍</b><br><br>
             نحن هنا لضمان راحتكِ وأمان طفلكِ بأعلى مستويات الرعاية الطبيّة.<br><br>
             من فضلكِ اضغطي على الزر للتحدث مباشرة مع سكرتارية العيادة لتنسيق كافة التفاصيل:<br>
             <a href="https://wa.me/201125337717" class="option-btn green" style="text-decoration:none; display:block; margin-top:20px;">💬 واتساب حجز الولادة الآن</a>
@@ -261,7 +261,7 @@ function renderForm(type) {
         let fields = `<b style="font-size:1.1rem; color:${color};">${title}</b>
             <input type="text" id="pName" placeholder="👤 اسمكِ الثلاثي بالكامل" oninput="this.value=this.value.replace(/[^\\u0600-\\u06FF\\s]/g,''); checkNameInput(this)">
             <div id="nameErr" class="error-hint">⚠️ يرجى كتابة الاسم ثلاثي بالحروف فقط</div>
-            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم) يفضل واتساب" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم) يفضل واتساب" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,''); checkPhoneInput(this)">
             <div id="phoneErr" class="error-hint">⚠️ يرجى التأكد من الرقم (11 رقم فقط)</div>
             <p style="font-size:0.85rem; margin-top:10px;">📅 اختاري اليوم المفضل للحضور:</p>
             <input type="date" id="pBookingDate" min="${today}" onchange="checkWeekend(this)">
@@ -284,7 +284,7 @@ function renderForm(type) {
                     <option value="انستغرام">📸 انستغرام</option>
                     <option value="أخرى">🔍 مكان تانى</option>
                 </select><div id="otherArea"></div>
-                <button class="option-btn aesthetic-btn" style="color:white; margin-top:15px;" onclick="validateAndSubmit('تجميل نسائي')">تأكيد طلب الحجز ✅</button>`;
+                <button class="option-btn aesthetic-btn" style="color:white; margin-top:15px;" onclick="validateAndSubmit('aesthetic')">تأكيد طلب الحجز ✅</button>`;
         } else if (type === 'first') {
             fields += `<select id="pSource" onchange="toggleOther(this.value)">
                     <option value="">✨ عرفتينا منين؟</option>
@@ -293,9 +293,9 @@ function renderForm(type) {
                     <option value="صديقة">👭 صديقة</option>
                     <option value="انستغرام">📸 انستغرام</option>
                     <option value="أخرى">🔍 مكان تانى</option>
-                </select><div id="otherArea"></div><button class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('كشف أول مرة')">تأكيد طلب الحجز ✅</button>`;
+                </select><div id="otherArea"></div><button class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('first')">تأكيد طلب الحجز ✅</button>`;
         } else {
-             fields += `<div id="submitArea"><button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('${type === 'follow' ? 'متابعة' : 'استشارة'}')">تأكيد طلب الحجز ✅</button></div>`;
+             fields += `<div id="submitArea"><button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('${type}')">تأكيد طلب الحجز ✅</button></div>`;
         }
         addMessage(`<div class="booking-form" id="activeForm">${fields}</div>`);
     }, 400);
@@ -305,7 +305,7 @@ function checkWeekend(el) {
     const date = new Date(el.value);
     const day = date.getUTCDay(); 
     if (day === 4 || day === 5) { alert("عذراً، العيادة مغلقة يومي الخميس والجمعة ✋ يرجى اختيار يوم آخر."); el.value = ""; }
-    if(document.getElementById("pLastVisit") && document.getElementById("pLastVisit").value && document.getElementById("dateFeedback") && document.getElementById("dateFeedback").innerHTML !== "") check15Days();
+    if(document.getElementById("pLastVisit") && document.getElementById("pLastVisit").value && document.getElementById("dateFeedback").innerHTML !== "") check15Days();
 }
 
 function check15Days() {
@@ -316,7 +316,7 @@ function check15Days() {
     const fb = document.getElementById("dateFeedback");
     const sub = document.getElementById("submitArea");
     if (diff > 15) { fb.innerHTML = `<span style="color:red;">⚠️ المدة بين الزيارة والحجز تجاوزت 15 يوماً، يرجى حجز كشف جديد.</span>`; if(sub) sub.innerHTML = `<button class="option-btn" onclick="renderForm('first')">📅 حجز كشف جديد</button>`; }
-    else { fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`; if(sub) sub.innerHTML = `<button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('استشارة')">تأكيد طلب الحجز ✅</button>`; }
+    else { fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`; if(sub) sub.innerHTML = `<button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('consult')">تأكيد طلب الحجز ✅</button>`; }
 }
 
 function validateAndSubmit(bookingType) {
@@ -329,9 +329,9 @@ function validateAndSubmit(bookingType) {
     const lastVisit = lastVisitEl ? lastVisitEl.value : "";
     const fileInput = document.getElementById("pFile");
 
-    if ((bookingType === 'متابعة' || bookingType === 'استشارة' || bookingType === 'تجميل نسائي') && !lastVisit) { alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); return; }
+    if ((bookingType === 'follow' || bookingType === 'consult' || bookingType === 'aesthetic') && !lastVisit) { alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); return; }
     if (name.split(/\s+/).length < 3 || phone.length < 11 || !bookingDate) { alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون وتاريخ الحجز 👤📱📅"); return; }
-    if (bookingType === 'كشف أول مرة' || bookingType === 'تجميل نسائي') {
+    if (bookingType === 'first' || bookingType === 'aesthetic') {
         if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
         if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
     }
@@ -340,7 +340,14 @@ function validateAndSubmit(bookingType) {
     document.getElementById("activeForm").style.pointerEvents = "none";
     showTyping();
 
-    const payload = { name, phone, type: bookingType, bookingDate, lastVisit, source: source === 'أخرى' ? other : source };
+    const payload = { 
+        name: name, 
+        phone: phone, 
+        type: (bookingType === 'aesthetic' ? 'تجميل نسائي' : (bookingType === 'first' ? 'كشف أول مرة' : (bookingType === 'follow' ? 'متابعة' : 'استشارة'))), 
+        bookingDate: bookingDate, 
+        lastVisit: lastVisit, 
+        source: source === 'أخرى' ? other : source 
+    };
 
     if (fileInput && fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -372,7 +379,7 @@ function sendToDatabase(payload) {
 }
 
 function finishProcess(data, res) {
-    let finalId = (data.type === 'تجميل نسائي' || data.type === 'aesthetic') ? 'D' + res.id : res.id;
+    let finalId = (data.type === 'تجميل نسائي') ? 'A' + res.id : 'B' + res.id;
     const waMsg = `*طلب حجز موعد جديد*\n📌 الرقم: ${finalId}\n🩺 النوع: ${data.type}\n👤 الاسم: ${data.name}\n📱 الهاتف: ${data.phone}\n📅 اليوم المختار: ${data.bookingDate}\n⚠️ يرجى تأكيد ساعة الحضور`;
     const waUrl = `https://wa.me/201125337717?text=${encodeURIComponent(waMsg)}`;
     addMessage(`<div style="text-align:center; border:2px solid var(--primary-color); background: linear-gradient(135deg,#fff0f6,#ffe4ec); padding:20px; border-radius:28px;"><div style="font-size:1.25rem; font-weight:800; color:#be185d; margin-bottom:12px;">🎉 تم تسجيل طلبكِ بنجاح</div><div style="text-align:right; font-size:0.95rem; line-height:2.2; color:#334155;">📌 رقمك المرجعي: <b class="data-highlight">${finalId}</b><br>🩺 نوع الكشف: <b class="data-highlight">${data.type}</b><br>📅 اليوم المختار: <b class="data-highlight">${data.bookingDate}</b></div><hr style="margin:15px 0; border-top:1.5px solid #fbcfe8;"><div style="font-size:0.85rem; color:#dc2626; font-weight:800; margin-bottom:15px;">إدارة العيادة ستتواصل معكِ لتحديد الساعة<br>يرجى تأكيد الحجز عبر واتساب الآن</div><a href="${waUrl}" target="_blank" class="premium-wa-link">اضغطي هنا لتأكيد الحجز عبر واتساب</a></div>`);
@@ -415,6 +422,7 @@ function quickSend(text) {
 }
 
 function checkNameInput(el) { document.getElementById("nameErr").style.display = el.value.trim().split(/\s+/).length < 3 ? "block" : "none"; }
+function checkPhoneInput(el) { document.getElementById("phoneErr").style.display = el.value.length < 11 ? "block" : "none"; }
 function toggleOther(v) { document.getElementById("otherArea").innerHTML = v === 'أخرى' ? `<input type="text" id="pOther" placeholder="عرفتينا منين ...">` : ""; }
 function addMessage(t) { const d = document.createElement("div"); d.className = "msg"; d.innerHTML = t; document.getElementById("contentArea").appendChild(d); document.getElementById("contentArea").scrollTop = 0; }
 function showTyping() { const d = document.createElement("div"); d.id = "typing"; d.className = "msg typing"; d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>'; document.getElementById("contentArea").appendChild(d); }
