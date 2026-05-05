@@ -3,432 +3,895 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>عيادة دكتورة دعاء - Ultra Premium UI</title>
+<title>Blank Ultra Premium Theme Template</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 <style>
-/* --- 1. أساسيات الاستايل الفخم (ممنوع اللمس) --- */
 :root { 
     --primary-color: #ec4899; 
-    --medical-blue: rgb(0, 160, 196); 
+    --secondary-color: rgb(0, 160, 196); 
     --silk-bg: #ffffff;
     --silk-border: linear-gradient(135deg, #fce7f3 0%, #fff 50%, #fce7f3 100%);
-    --dark-pink: #be185d;
+    --dark-accent: #be185d;
     --success-green: #22c55e;
+    --error-red: #e11d48;
+    --app-radius: 40px;
+    --card-radius: 28px;
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+[data-mode="dark"] {
+    --silk-bg: #121212;
+    --dark-accent: #fbcfe8;
+    --silk-border: linear-gradient(135deg, #4c0519 0%, #121212 50%, #4c0519 100%);
+}
+
+[data-mode="dark"] .msg,
+[data-mode="dark"] .card,
+[data-mode="dark"] .booking-form {
+    background: #1e1e1e !important;
+    color: white !important;
+}
+
+[data-mode="dark"] input,
+[data-mode="dark"] select {
+    background: #2d2d2d !important;
+    color: white !important;
+    border-color: #444 !important;
+}
+
+[data-mode="dark"] .social-nav {
+    background: #1e1e1e !important;
+    border-color: #333 !important;
+}
+
+[data-mode="dark"] .social-item {
+    background: #2d2d2d !important;
+    border-color: #444 !important;
+    color: white !important;
+}
+
+[data-theme="purple"] {
+    --primary-color: #8b5cf6;
+    --dark-accent: #5b21b6;
+    --silk-border: linear-gradient(135deg, #ede9fe 0%, #fff 50%, #ede9fe 100%);
+}
+
+[data-theme="sky"] {
+    --primary-color: #0ea5e9;
+    --dark-accent: #0369a1;
+    --silk-border: linear-gradient(135deg, #e0f2fe 0%, #fff 50%, #e0f2fe 100%);
+}
+
+[data-theme="red"] {
+    --primary-color: #e11d48;
+    --dark-accent: #9f1239;
+    --silk-border: linear-gradient(135deg, #ffe4e6 0%, #fff 50%, #ffe4e6 100%);
+}
+
+[data-theme="mint"] {
+    --primary-color: #10b981;
+    --dark-accent: #065f46;
+    --silk-border: linear-gradient(135deg, #d1fae5 0%, #fff 50%, #d1fae5 100%);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
 
 body {
-    margin: 0; font-family: 'Cairo', sans-serif;
-    height: 100dvh; display: flex; justify-content: center; align-items: center;
-    background-image: radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%), radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
-    overflow: hidden; direction: rtl;
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:
+        radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%),
+        radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
+    overflow: hidden;
+    direction: rtl;
+    transition: var(--transition);
 }
 
-/* Splash Screen */
-#splash {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(at 0% 0%, #ffe4ec 0, transparent 50%), radial-gradient(at 100% 100%, #fdf2f8 0, transparent 50%);
-    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transition: opacity 1.5s ease-in-out;
+.controls-top {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
 }
-#splash img { width: 180px; height: 180px; animation: zoomPulse 3s infinite ease-in-out; }
-@keyframes zoomPulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+
+.control-group {
+    display: flex;
+    gap: 8px;
+}
+
+.lang-btn,
+.theme-btn,
+.mode-btn {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 6px 14px;
+    color: var(--dark-accent);
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#splash {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+        url("https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200")
+        center center / cover no-repeat;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#splash.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.splash-title {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 900;
+    padding: 14px 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.splash-signature {
+    position: absolute;
+    bottom: 35px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0.8;
+}
 
 .app {
-    width: 98%; max-width: 450px; height: 98%; 
-    display: flex; flex-direction: column;
-    background: var(--silk-bg); border-radius: 40px;
+    width: 98%;
+    max-width: 450px;
+    height: 98%;
+    display: flex;
+    flex-direction: column;
+    background: var(--silk-bg);
+    border-radius: var(--app-radius);
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    position: relative; overflow: hidden;
+    position: relative;
+    overflow: hidden;
     border: 1.5px solid transparent;
     background-image: linear-gradient(var(--silk-bg), var(--silk-bg)), var(--silk-border);
-    background-origin: border-box; background-clip: content-box, border-box;
-    opacity: 0; transition: opacity 1s ease;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
-.header-container { width: 100%; position: relative; flex-shrink: 0; }
-.header-slider { width: 100%; aspect-ratio: 2 / 1; overflow: hidden; }
-.swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-.banner-overlay { position: absolute; bottom: 15px; right: 15px; left: 15px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); padding: 8px 15px; border-radius: 12px; border: 1px solid var(--primary-color); color: var(--dark-pink); font-size: 0.85rem; font-weight: 800; text-align: center; }
-
-.back-btn {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: rgba(255, 255, 255, 0.85); border: 1.5px solid var(--medical-blue);
-    display: none; align-items: center; justify-content: center;
-    cursor: pointer; position: absolute; bottom: 10px; right: 15px; z-index: 100;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: 0.3s;
+.header-slider {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
 }
-.back-btn svg { width: 22px; height: 22px; fill: var(--medical-blue); }
 
-.main-content { flex: 1; overflow-y: auto; padding: 15px; scrollbar-width: none; display: flex; flex-direction: column; gap: 15px; position: relative; animation: fadeIn 0.4s ease; }
-.main-content::-webkit-scrollbar { display: none; }
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-.banner { padding: 20px 15px; border-radius: 25px; color: #be185d; font-weight: 700; text-align: center; background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box; border: 1.5px solid transparent; box-shadow: 0 10px 20px rgba(236, 72, 153, 0.05); }
-.card { padding: 20px; border-radius: 28px; border: 1.5px solid transparent; background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box; box-shadow: 0 8px 20px rgba(0,0,0,0.03); }
+.banner-overlay {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    padding: 8px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--primary-color);
+    color: var(--dark-accent);
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-align: center;
+}
 
-.option-btn, .btn { width: 100%; padding: 14px; border-radius: 18px; border: none; font-weight: 700; color: white; background: linear-gradient(135deg, var(--medical-blue), #008eb0); box-shadow: 0 5px 15px rgba(0, 160, 196, 0.3); cursor: pointer; font-family: 'Cairo'; transition: all 0.3s ease; margin: 6px 0; text-decoration: none; display: block; text-align: center; }
-.option-btn:hover, .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 160, 196, 0.5); }
-.option-btn.green { background: linear-gradient(135deg, var(--success-green), #16a34a); box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3); }
+.banner-sub {
+    padding: 12px 15px;
+    border-radius: 15px;
+    color: var(--dark-accent);
+    font-weight: 700;
+    text-align: center;
+    background: white;
+    border: 1.5px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.15);
+    animation: softGlow 3s infinite alternate;
+}
 
-/* زر التجميل النسائي النيوني البريميوم */
-.aesthetic-btn {
+@keyframes softGlow {
+    from { box-shadow: 0 0 5px var(--primary-color); }
+    to { box-shadow: 0 0 15px var(--primary-color); }
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+.main-content::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    padding: 20px;
+    border-radius: var(--card-radius);
+    border: 1.5px solid transparent;
+    background: linear-gradient(var(--silk-bg), var(--silk-bg)) padding-box, var(--silk-border) border-box;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+}
+
+.msg {
+    width: 100%;
+    padding: 18px;
+    border-radius: var(--card-radius);
+    background: white;
+    border: 1.5px solid var(--primary-color);
+    text-align: center;
+    color: #334155;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.btn,
+.option-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 18px;
+    border: none;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--secondary-color), #008eb0);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Cairo';
+    margin: 6px 0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+[data-theme] .btn,
+[data-theme] .option-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-accent));
+}
+
+.btn-special {
     background: linear-gradient(135deg, #ff0080 0%, #7928ca 100%) !important;
-    box-shadow: 0 8px 25px rgba(121, 40, 202, 0.4) !important;
     animation: neonPulse 3s infinite alternate;
 }
-@keyframes neonGlow { from { filter: brightness(1); } to { filter: brightness(1.2); } }
 
-.msg { width: 100%; padding: 18px; border-radius: 28px; background: white; border: 1.5px solid var(--medical-blue); box-shadow: 0 0 15px rgba(0, 160, 196, 0.15); text-align: center; color: #334155; font-size: 0.92rem; line-height: 1.6; }
-.data-highlight { background: #f0f9ff; color: var(--medical-blue); padding: 2px 8px; border-radius: 8px; font-weight: 800; border: 1px solid #e0f2fe; }
-.booking-form { width: 100%; background: #fffbff; border-radius: 25px; border: 2.5px solid var(--medical-blue); padding: 18px; }
-.booking-form input, .booking-form select { width: 100%; margin: 8px 0; padding: 12px; border-radius: 12px; border: 1px solid #eee; text-align: center; font-family: 'Cairo'; font-size: 0.9rem; }
-.welcome-box { border: 2.5px solid var(--dark-pink); border-radius: 15px; padding: 12px; background: #fff0f6; color: var(--dark-pink); font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
-.pregnancy-result { width: 100%; background: linear-gradient(135deg, #fff0f6, #ffe4ec, #fbcfe8); border-radius: 25px; padding: 20px; text-align: center; box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); animation: glowPulse 2.5s infinite ease-in-out; }
-.main-number { font-size: 1.8rem; font-weight: 800; color: #ec4899; text-shadow: 0 0 12px rgba(236, 72, 153, 0.6); }
-.delivery-date { margin-top: 15px; padding: 12px; background: white; border-radius: 15px; border: 2px solid var(--primary-color); color: var(--dark-pink); font-weight: 700; }
-.spiritual-glow { font-size: 1.4rem; font-weight: 800; color: var(--medical-blue); text-shadow: 0 0 15px rgba(0, 160, 196, 0.4); animation: spiritPulse 2s infinite ease-in-out; }
+@keyframes neonPulse {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.2); }
+}
 
-.social-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px 25px 15px; background: #ffffff; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
-.social-item { transition: 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; }
-.social-item img { width: 32px; height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); transition: 0.3s; }
-.social-item:hover { transform: translateY(-5px); }
-.wa-special img { width: 45px; height: 45px; filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.4)); animation: wa-glow 2s infinite ease-in-out; }
+.inline-back-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 18px;
+    border: 1.5px solid var(--primary-color);
+    background: linear-gradient(135deg, rgba(255,255,255,0.96), #fff0f7);
+    color: var(--dark-accent);
+    font-family: 'Cairo';
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 0 18px rgba(236, 72, 153, 0.22);
+    animation: backGlow 2.4s infinite alternate;
+    margin: 12px 0 4px 0;
+}
 
-@keyframes glowPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-@keyframes spiritPulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.2); } }
-@keyframes wa-glow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(37, 211, 102, 0.3)); } 50% { transform: scale(1.1); filter: drop-shadow(0 0 18px rgba(37, 211, 102, 0.6)); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.inline-back-btn i {
+    color: var(--primary-color);
+}
 
-.premium-wa-link { display: block; text-decoration: none; padding: 15px; border-radius: 15px; text-align: center; font-weight: 800; background: #dc2626; color: white; animation: flash 1s infinite; margin: 10px 0; }
-@keyframes flash { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-.typing { display: flex; gap: 4px; justify-content: center; padding: 10px; }
-.dot { width: 6px; height: 6px; background: var(--medical-blue); border-radius: 50%; animation: blink 1.4s infinite; }
-@keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-.error-hint { color: #e11d48; font-size: 0.75rem; font-weight: 700; display: none; margin-top: -5px; margin-bottom: 5px; }
+@keyframes backGlow {
+    from { box-shadow: 0 0 8px rgba(236, 72, 153, 0.18); transform: scale(1); }
+    to { box-shadow: 0 0 22px rgba(236, 72, 153, 0.38); transform: scale(1.01); }
+}
+
+.booking-form {
+    width: 100%;
+    background: #fffbff;
+    border-radius: var(--card-radius);
+    border: 2.5px solid var(--primary-color);
+    padding: 18px;
+}
+
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    text-align: center;
+    font-family: 'Cairo';
+    font-size: 0.9rem;
+}
+
+.form-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--secondary-color);
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    background: rgba(0, 160, 196, 0.08);
+    border: 1px solid rgba(0, 160, 196, 0.18);
+}
+
+.form-title i {
+    color: var(--primary-color);
+    font-size: 1.15rem;
+}
+
+.form-signature {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(236, 72, 153, 0.35);
+    color: var(--dark-accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-align: center;
+    opacity: 0.82;
+}
+
+.details-box {
+    text-align: right;
+    font-size: 0.9rem;
+    line-height: 2;
+    border: 1px dashed var(--primary-color);
+    padding: 12px;
+    border-radius: 15px;
+    margin: 10px 0;
+    background: rgba(236,72,153,0.04);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.detail-label {
+    color: #64748b;
+}
+
+.detail-value {
+    color: var(--dark-accent);
+    font-weight: 800;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(236, 72, 153, 0.1);
+    color: var(--dark-accent);
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.error-hint {
+    color: var(--error-red);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: none;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+.friday-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.fri-card {
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    width: 85%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-top: 5px solid var(--secondary-color);
+}
+
+.social-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 15px 25px 15px;
+    background: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    flex-shrink: 0;
+}
+
+.social-item {
+    transition: 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    color: var(--dark-accent);
+    font-size: 1.2rem;
+}
+
+.wa-special {
+    width: 55px !important;
+    height: 55px !important;
+    background: #25d366 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border: none !important;
+    font-size: 1.8rem !important;
+    transform: translateY(-15px);
+    animation: wa-glow 2s infinite;
+}
+
+@keyframes wa-glow {
+    0%, 100% { transform: translateY(-15px) scale(1); }
+    50% { transform: translateY(-15px) scale(1.1); box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
+}
+
+.brand-footer {
+    text-align: center;
+    padding: 4px 0 10px 0;
+    background: var(--silk-bg);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--dark-accent);
+    flex-shrink: 0;
+}
+
+.premium-wa-link {
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 800;
+    background: #25d366;
+    color: white;
+    animation: flash 1s infinite;
+    margin: 10px 0;
+}
+
+@keyframes flash {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+.typing {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.en-mode {
+    direction: ltr !important;
+}
+
+.en-mode .details-box {
+    text-align: left !important;
+}
 </style>
 </head>
 
 <body>
 
 <div id="splash">
-    <img src="https://cdn-icons-png.flaticon.com/512/3304/3304567.png" alt="Splash">
-    <h2 style="color: var(--dark-pink); margin-top: 15px; font-weight: 800;">د. دعاء شعبان</h2>
+    <div class="splash-title">Template Title</div>
+    <div class="splash-signature">Template Signature © 0000</div>
+</div>
+
+<div id="holidayAlert" class="friday-modal">
+    <div class="fri-card">
+        <i class="fa-solid fa-calendar-xmark" style="font-size: 3.5rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+        <h3 id="holidayTitle">تنبيه تجريبي</h3>
+        <p id="holidayMsg" style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">نص تجريبي للتنبيه. من فضلك اختر يوماً آخر.</p>
+        <button class="btn" style="background:var(--secondary-color); margin-top: 15px;" onclick="closeHoliday()">فهمت</button>
+    </div>
 </div>
 
 <div class="app" id="mainApp">
+    <div class="controls-top">
+        <div class="control-group">
+            <div class="lang-btn" id="langBtn" onclick="toggleLanguage()">EN</div>
+            <div class="mode-btn" onclick="toggleDarkMode()"><i class="fa-solid fa-moon"></i></div>
+        </div>
+        <div class="theme-btn" onclick="nextTheme()"><i class="fa-solid fa-palette"></i></div>
+    </div>
+
     <div class="header-container">
         <div class="header-slider swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="https://i.ibb.co/xq78ZD0G/resized-1200x600.png"></div>
-                <div class="swiper-slide" onclick="startAesthetic()"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=1200"><div class="banner-overlay">🌸 التجميل النسائي VIP متاح الآن.. احجزي ميعادك</div></div>
-                <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200"><div class="banner-overlay">✨ انتظروا أقوى عروضنا قريباً 💗</div></div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200">
+                    <div class="banner-overlay" id="overlay1">نص تجريبي للبانر الأول</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1200">
+                    <div class="banner-overlay" id="overlay2">نص تجريبي للبانر الثاني</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200">
+                    <div class="banner-overlay" id="overlay3">نص تجريبي للبانر الثالث</div>
+                </div>
             </div>
             <div class="swiper-pagination"></div>
-        </div>
-        <div id="backBtn" class="back-btn" onclick="goHome()">
-            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
         </div>
     </div>
 
     <div id="contentArea" class="main-content"></div>
 
     <div class="social-nav">
-        <a href="https://www.instagram.com/dr_doaa_shaban/" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-        <a href="https://www.facebook.com/DrdoaaShaban" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
-        <a href="https://wa.me/201125337717" class="social-item wa-special" onclick="handleVibrate()"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-        <a href="#" class="social-item" onclick="shareApp(event)"><img src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"></a>
-        <a href="https://www.tiktok.com/@doaaobgyn" class="social-item"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"></a>
+        <a href="#" class="social-item"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-item"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-item wa-special" onclick="handleVibrate()"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" class="social-item"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="social-item" onclick="shareApp(event)"><i class="fa-solid fa-share-nodes"></i></a>
     </div>
+
+    <div class="brand-footer">Template Footer © 0000</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqG0xl_WPumyILJaAYgYfulq1XRvojGQaM1cBCMLtak2oRcGR9YtuIY8BCpBqmHlm3/exec";
+let currentLang = 'ar';
+let themes = ['default', 'purple', 'sky', 'red', 'mint'];
+let currentThemeIndex = 0;
+let isDark = false;
+let swiper;
+
+const contentArea = document.getElementById('contentArea');
+
+const i18n = {
+    ar: {
+        b1: "نص تجريبي للبانر الأول",
+        b2: "نص تجريبي للبانر الثاني",
+        b3: "نص تجريبي للبانر الثالث",
+        intro: "نص تجريبي مختصر يمكن تغييره لاحقاً",
+        service1: "خدمة تجريبية أولى",
+        service2: "خدمة تجريبية ثانية",
+        service3: "خدمة تجريبية ثالثة",
+        start: "ابدأ التجربة",
+        formTitle: "نموذج تجريبي",
+        name: "الاسم",
+        phone: "رقم الهاتف",
+        date: "التاريخ",
+        namePl: "اكتب الاسم هنا",
+        phonePl: "اكتب رقم الهاتف",
+        confirm: "تأكيد تجريبي",
+        back: "رجوع للرئيسية",
+        nameErr: "⚠️ نص تحذير تجريبي للاسم",
+        phoneErr: "⚠️ نص تحذير تجريبي للهاتف",
+        errData: "من فضلك أكمل البيانات: ",
+        success: "تمت العملية التجريبية بنجاح",
+        duplicated: "تنبيه تجريبي",
+        holidayTitle: "تنبيه تجريبي",
+        holidayMsg: "نص تجريبي للتنبيه. من فضلك اختر يوماً آخر."
+    },
+    en: {
+        b1: "Sample banner text one",
+        b2: "Sample banner text two",
+        b3: "Sample banner text three",
+        intro: "Short sample text editable later",
+        service1: "Sample Service One",
+        service2: "Sample Service Two",
+        service3: "Sample Service Three",
+        start: "Start Demo",
+        formTitle: "Sample Form",
+        name: "Name",
+        phone: "Phone",
+        date: "Date",
+        namePl: "Enter name here",
+        phonePl: "Enter phone number",
+        confirm: "Sample Confirm",
+        back: "Back to Home",
+        nameErr: "⚠️ Sample name warning",
+        phoneErr: "⚠️ Sample phone warning",
+        errData: "Please complete: ",
+        success: "Sample action completed successfully",
+        duplicated: "Sample Alert",
+        holidayTitle: "Sample Alert",
+        holidayMsg: "Sample alert text. Please choose another day."
+    }
+};
+
+const signatureHtml = `<div class="form-signature">Template Signature © 0000</div>`;
 
 window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('splash').style.opacity = '0';
+        document.getElementById('splash').classList.add('hide');
         document.getElementById('mainApp').style.opacity = '1';
-        setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 1500);
+
+        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+        if (randomTheme !== 'default') document.documentElement.setAttribute('data-theme', randomTheme);
+
         loadHomePage();
-    }, 2500);
+        initSwiper();
+    }, 1800);
 });
 
-const swiper = new Swiper('.swiper', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.swiper-pagination', clickable: true } });
+function initSwiper() {
+    if (swiper) swiper.destroy();
+    swiper = new Swiper('.swiper', {
+        loop: true,
+        autoplay: { delay: 4000 },
+        pagination: { el: '.swiper-pagination', clickable: true }
+    });
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+
+    document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'AR';
+    document.body.classList.toggle('en-mode', currentLang === 'en');
+
+    document.getElementById('overlay1').innerText = i18n[currentLang].b1;
+    document.getElementById('overlay2').innerText = i18n[currentLang].b2;
+    document.getElementById('overlay3').innerText = i18n[currentLang].b3;
+    document.getElementById('holidayTitle').innerText = i18n[currentLang].holidayTitle;
+    document.getElementById('holidayMsg').innerText = i18n[currentLang].holidayMsg;
+
+    loadHomePage();
+    setTimeout(initSwiper, 100);
+}
+
+function toggleDarkMode() {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-mode', isDark ? 'dark' : 'light');
+    document.querySelector('.mode-btn i').className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+}
+
+function nextTheme() {
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    const theme = themes[currentThemeIndex];
+
+    if (theme === 'default') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', theme);
+}
+
+function getBackButton() {
+    return `<button class="inline-back-btn" onclick="loadHomePage()"><i class="fa-solid fa-house"></i> ${i18n[currentLang].back}</button>`;
+}
 
 function loadHomePage() {
-    document.getElementById('backBtn').style.display = 'none';
-    const content = document.getElementById('contentArea');
-    content.innerHTML = `
-        <div class="banner">✨ رعاية طبية متكاملة لراحتكِ ولطفلكِ<br>📅 احجزي واطمني باستخدام أحدث الأجهزة</div>
-        <div class="cards">
-            <div class="card">
-                <div class="title">📅 حجز ميعاد</div>
-                <div class="desc">اختاري نوع الكشف واليوم المناسب لكِ</div>
-                <button class="btn" onclick="startBooking()">ابدئي الحجز</button>
-            </div>
-            <div class="card" style="border-color:#7928ca; background: #fff0f6;">
-                <div class="title" style="color:#7928ca">🌸 التجميل النسائي</div>
-                <div class="desc">استعدي لتجربة جمالية فريدة تعيد لكِ الثقة والأنوثة، اختاري الموعد الذي يناسبكِ.</div>
-                <button class="btn aesthetic-btn" onclick="startAesthetic()">احجزي الآن ✨</button>
-            </div>
-            <div class="card">
-                <div class="title">🤰 احسبي عمر حملك</div>
-                <div class="desc">نتيجة فورية وموعد الولادة المتوقع بدقة</div>
-                <button class="btn" onclick="startCalculator()">احسبي الآن</button>
-            </div>
-            <div class="card">
-                <div class="title">🎁 عروض وخدمات</div>
-                <button class="btn">💥 قريباً... 💗</button>
-            </div>
+    contentArea.innerHTML = `
+        <div class="banner-sub">${i18n[currentLang].intro}</div>
+        <div class="card">
+            <div style="font-weight:800; margin-bottom:10px; color:var(--dark-accent);">${i18n[currentLang].service1}</div>
+            <button class="btn" onclick="startDemoForm('one')"><i class="fa-solid fa-layer-group"></i> ${i18n[currentLang].start}</button>
+        </div>
+        <div class="card">
+            <div style="font-weight:800; margin-bottom:10px; color:var(--dark-accent);">${i18n[currentLang].service2}</div>
+            <button class="btn btn-special" onclick="startDemoForm('two')"><i class="fa-solid fa-wand-magic-sparkles"></i> ${i18n[currentLang].start}</button>
+        </div>
+        <div class="card">
+            <div style="font-weight:800; margin-bottom:10px; color:var(--dark-accent);">${i18n[currentLang].service3}</div>
+            <button class="btn" onclick="showSampleResult()"><i class="fa-solid fa-circle-info"></i> ${i18n[currentLang].start}</button>
         </div>`;
 }
 
-function goHome() { loadHomePage(); }
-
-function startBooking() {
-    document.getElementById('backBtn').style.display = 'flex';
-    document.getElementById('contentArea').innerHTML = '';
-    showTyping();
-    setTimeout(() => {
-        removeTyping();
-        addMessage(getWelcomeMessage());
-    }, 400);
-}
-
-function startAesthetic() {
-    document.getElementById('backBtn').style.display = 'flex';
-    renderForm('aesthetic');
-}
-
-function getWelcomeMessage() {
-    return `
-    <div class="welcome-box">
-        📅 من فضلكِ اختاري اليوم الذي يناسبك للحجز.<br>
-        ستقوم إدارة العيادة بالتواصل معكِ لتحديد ساعة الحضور.
-    </div>
-    👋 <b style="color:var(--dark-pink);">أهلاً بيكِ في عيادتنا</b><br>
-    أنا مساعدكِ الذكي 🤍 هكون معاكي علشان أسهّل عليكِ الحجز:
-    <div class="btn-group">
-        <button class="option-btn" onclick="showBookingOptions()">📅 احجزيلي ميعاد</button>
-    </div>`;
-}
-
-function showBookingOptions() {
-    document.getElementById('contentArea').innerHTML = '';
-    showTyping();
-    setTimeout(() => {
-        removeTyping();
-        addMessage(`📋 <b style="color:var(--dark-pink); font-size:1.1rem;">من فضلكِ اختاري نوع الكشف:</b><br>
-        <div class="btn-group">
-            <button class="option-btn" onclick="renderForm('first')">💖 كشف نساء أول مرة</button>
-            <button class="option-btn" onclick="renderForm('follow')">🔄 كشف نساء متابعة</button>
-            <button class="option-btn" onclick="renderForm('consult')">📝 كشف نساء "استشارة"</button>
-            <button class="option-btn" onclick="renderForm('birth')">👶 حجز ولادة</button>
-        </div>`);
-    }, 400);
-}
-
-function renderForm(type) {
-    if (type === 'birth') {
-        document.getElementById('contentArea').innerHTML = '';
-        showTyping();
-        setTimeout(() => {
-            removeTyping();
-            addMessage(`
-            <div class="spiritual-glow">✨ طلب حجز ولادة ✨</div>
-            <br><b style="font-size:1.1rem; color:var(--medical-blue);">يسعدنا جداً أن نرافقكِ في هذه اللحظة السعيدة والمميزة 🤱 🤍</b><br><br>
-            نحن هنا لضمان راحتكِ وأمان طفلكِ بأعلى مستويات الرعاية الطبيّة.<br><br>
-            من فضلكِ اضغطي على الزر للتحدث مباشرة مع سكرتارية العيادة لتنسيق كافة التفاصيل:<br>
-            <a href="https://wa.me/201125337717" class="option-btn green" style="text-decoration:none; display:block; margin-top:20px;">💬 واتساب حجز الولادة الآن</a>
-            `);
-        }, 400);
-        return;
-    }
-    document.getElementById('contentArea').innerHTML = '';
+function startDemoForm(type) {
     const today = new Date().toISOString().split('T')[0];
+
+    contentArea.innerHTML = '';
     showTyping();
+
     setTimeout(() => {
         removeTyping();
-        let title = type === 'aesthetic' ? "🌸 حجز التجميل النسائي VIP" : "📋 بيانات الحجز";
-        let color = type === 'aesthetic' ? "#7928ca" : "var(--medical-blue)";
-        
-        let fields = `<b style="font-size:1.1rem; color:${color};">${title}</b>
-            <input type="text" id="pName" placeholder="👤 اسمكِ الثلاثي بالكامل" oninput="this.value=this.value.replace(/[^\\u0600-\\u06FF\\s]/g,''); checkNameInput(this)">
-            <div id="nameErr" class="error-hint">⚠️ يرجى كتابة الاسم ثلاثي بالحروف فقط</div>
-            <input type="tel" id="pPhone" placeholder="📱 موبايلكِ (11 رقم) يفضل واتساب" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,''); checkPhoneInput(this)">
-            <div id="phoneErr" class="error-hint">⚠️ يرجى التأكد من الرقم (11 رقم فقط)</div>
-            <p style="font-size:0.85rem; margin-top:10px;">📅 اختاري اليوم المفضل للحضور:</p>
-            <input type="date" id="pBookingDate" min="${today}" onchange="checkWeekend(this)">
-        `;
 
-        if (type === 'aesthetic' || type === 'follow' || type === 'consult') {
-            fields += `<p style="font-size:0.8rem; margin:10px 0 5px 0; color:var(--dark-pink); font-weight:700;">📅 تاريخ آخر زيارة للعيادة:</p>
-                <input type="date" id="pLastVisit" max="${today}" onchange="${type === 'consult' ? 'check15Days()' : ''}">
-                <div id="dateFeedback" style="font-size:0.8rem; font-weight:700; margin-top:5px;"></div>`;
-        }
-        
-        if (type === 'aesthetic') {
-            fields += `<p style="font-size:0.8rem; margin-top:10px; color:#7928ca; font-weight:700;">📄 من فضلكِ أضيفي صورة لآخر روشتة أو تقرير:</p>
-                <input type="file" id="pFile" accept="image/*">
-                <select id="pSource" onchange="toggleOther(this.value)">
-                    <option value="">✨ عرفتينا منين؟</option>
-                    <option value="فيسبوك">🔵 فيسبوك</option>
-                    <option value="تيك توك">⚫ تيك توك</option>
-                    <option value="صديقة">👭 صديقة</option>
-                    <option value="انستغرام">📸 انستغرام</option>
-                    <option value="أخرى">🔍 مكان تانى</option>
-                </select><div id="otherArea"></div>
-                <button class="option-btn aesthetic-btn" style="color:white; margin-top:15px;" onclick="validateAndSubmit('aesthetic')">تأكيد طلب الحجز ✅</button>`;
-        } else if (type === 'first') {
-            fields += `<select id="pSource" onchange="toggleOther(this.value)">
-                    <option value="">✨ عرفتينا منين؟</option>
-                    <option value="فيسبوك">🔵 فيسبوك</option>
-                    <option value="تيك توك">⚫ تيك توك</option>
-                    <option value="صديقة">👭 صديقة</option>
-                    <option value="انستغرام">📸 انستغرام</option>
-                    <option value="أخرى">🔍 مكان تانى</option>
-                </select><div id="otherArea"></div><button class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('first')">تأكيد طلب الحجز ✅</button>`;
-        } else {
-             fields += `<div id="submitArea"><button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('${type}')">تأكيد طلب الحجز ✅</button></div>`;
-        }
-        addMessage(`<div class="booking-form" id="activeForm">${fields}</div>`);
+        addMessage(`
+            <div class="booking-form" id="activeForm">
+                <div class="form-title"><i class="fa-solid fa-calendar-check"></i><span>${i18n[currentLang].formTitle}</span></div>
+
+                <input type="text" id="pName" placeholder="👤 ${i18n[currentLang].namePl}" oninput="checkNameInput(this)">
+                <div id="nameErr" class="error-hint">${i18n[currentLang].nameErr}</div>
+
+                <input type="tel" id="pPhone" placeholder="📱 ${i18n[currentLang].phonePl}" maxlength="11" oninput="checkPhoneInput(this)">
+                <div id="phoneErr" class="error-hint">${i18n[currentLang].phoneErr}</div>
+
+                <input type="date" id="pDate" min="${today}" onchange="checkHoliday(this)">
+
+                <button class="btn" onclick="submitDemo('${type}')"><i class="fa-solid fa-check"></i> ${i18n[currentLang].confirm}</button>
+                ${signatureHtml}
+                ${getBackButton()}
+            </div>
+        `);
     }, 400);
 }
 
-function checkWeekend(el) {
-    const date = new Date(el.value);
-    const day = date.getUTCDay(); 
-    if (day === 4 || day === 5) { alert("عذراً، العيادة مغلقة يومي الخميس والجمعة ✋ يرجى اختيار يوم آخر."); el.value = ""; }
-    if(document.getElementById("pLastVisit") && document.getElementById("pLastVisit").value && document.getElementById("dateFeedback").innerHTML !== "") check15Days();
+function checkHoliday(el) {
+    const day = new Date(el.value).getUTCDay();
+
+    if (day === 4 || day === 5) {
+        document.getElementById('holidayAlert').style.display = 'flex';
+        el.value = "";
+    }
 }
 
-function check15Days() {
-    const lastVisitVal = document.getElementById("pLastVisit").value;
-    const bookingDateVal = document.getElementById("pBookingDate").value;
-    if(!lastVisitVal || !bookingDateVal) return;
-    const diff = Math.floor((new Date(bookingDateVal) - new Date(lastVisitVal)) / (1000 * 60 * 60 * 24));
-    const fb = document.getElementById("dateFeedback");
-    const sub = document.getElementById("submitArea");
-    if (diff > 15) { fb.innerHTML = `<span style="color:red;">⚠️ المدة بين الزيارة والحجز تجاوزت 15 يوماً، يرجى حجز كشف جديد.</span>`; if(sub) sub.innerHTML = `<button class="option-btn" onclick="renderForm('first')">📅 حجز كشف جديد</button>`; }
-    else { fb.innerHTML = `<span style="color:green;">✅ متبقي ${15 - diff} أيام متاحة للاستشارة.</span>`; if(sub) sub.innerHTML = `<button id="subBtn" class="option-btn" style="background:var(--primary-color); color:white; margin-top:15px;" onclick="validateAndSubmit('consult')">تأكيد طلب الحجز ✅</button>`; }
+function closeHoliday() {
+    document.getElementById('holidayAlert').style.display = 'none';
 }
 
-function validateAndSubmit(bookingType) {
+function submitDemo(type) {
     const name = document.getElementById("pName").value.trim();
     const phone = document.getElementById("pPhone").value;
-    const bookingDate = document.getElementById("pBookingDate").value;
-    const source = document.getElementById("pSource")?.value || "";
-    const other = document.getElementById("pOther")?.value || "";
-    const lastVisitEl = document.getElementById("pLastVisit");
-    const lastVisit = lastVisitEl ? lastVisitEl.value : "";
-    const fileInput = document.getElementById("pFile");
+    const date = document.getElementById("pDate").value;
 
-    if ((bookingType === 'follow' || bookingType === 'consult' || bookingType === 'aesthetic') && !lastVisit) { alert("من فضلكِ اختاري تاريخ آخر زيارة للعيادة 📅"); return; }
-    if (name.split(/\s+/).length < 3 || phone.length < 11 || !bookingDate) { alert("يرجى إدخال البيانات كاملة الأسم ورقم التليفون وتاريخ الحجز 👤📱📅"); return; }
-    if (bookingType === 'first' || bookingType === 'aesthetic') {
-        if (!source) { alert("من فضلكِ اختاري عرفتينا منين ✨"); return; }
-        if (source === 'أخرى' && other.trim() === "") { alert("من فضلكِ اكتبي عرفتينا منين في الخانة المطلوبة 🔍"); return; }
+    let errors = [];
+
+    if (name.split(/\s+/).length < 2) errors.push(i18n[currentLang].name);
+    if (phone.length < 11) errors.push(i18n[currentLang].phone);
+    if (!date) errors.push(i18n[currentLang].date);
+
+    if (errors.length > 0) {
+        alert(i18n[currentLang].errData + errors.join(" - "));
+        return;
     }
 
-    document.getElementById("activeForm").style.opacity = "0.5";
-    document.getElementById("activeForm").style.pointerEvents = "none";
+    contentArea.innerHTML = '';
     showTyping();
 
-    const payload = { 
-        name: name, 
-        phone: phone, 
-        type: (bookingType === 'aesthetic' ? 'تجميل نسائي' : (bookingType === 'first' ? 'كشف أول مرة' : (bookingType === 'follow' ? 'متابعة' : 'استشارة'))), 
-        bookingDate: bookingDate, 
-        lastVisit: lastVisit, 
-        source: source === 'أخرى' ? other : source 
-    };
-
-    if (fileInput && fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            payload.fileData = e.target.result.split(",")[1];
-            payload.fileName = file.name;
-            payload.fileType = file.type;
-            sendToDatabase(payload);
-        };
-        reader.readAsDataURL(file);
-    } else {
-        sendToDatabase(payload);
-    }
-}
-
-function sendToDatabase(payload) {
-    fetch(SCRIPT_URL, { method: "POST", mode: "cors", body: JSON.stringify(payload) })
-    .then(res => res.json())
-    .then(response => {
-        removeTyping();
-        document.getElementById('contentArea').innerHTML = ''; 
-        if(response.status === "success") { finishProcess(payload, response); }
-        else if (response.status === "duplicated") {
-            let formattedMessage = response.message.replace(/(\d{4}-\d{2}-\d{2})|(\d{1,2}\/\d{1,2}\/\d{4})/, '<b class="data-highlight">$&</b>');
-            addMessage(`<div style="text-align:center; border: 2px solid var(--medical-blue); padding: 22px; border-radius: 28px; background: #f8fafc;"><b style="font-size:1.25rem; color:var(--medical-blue); display:block; margin-bottom:15px;">⚠️ تنبيه بخصوص حجزك</b><div style="font-weight:700; line-height:2; color:#334155; font-size:1rem;">${formattedMessage}</div><br><button class="option-btn green" onclick="window.open('https://wa.me/201125337717')">💬 تواصلِ معنا للاستفسار</button><button class="option-btn" style="background:#64748b; margin-top:10px;" onclick="goHome()">🏠 العودة للرئيسية</button></div>`);
-        } else { alert("حدث خطأ: " + response.message); location.reload(); }
-    }).catch(() => { removeTyping(); alert("عذراً، حصل خطأ في الاتصال بالخادم."); });
-}
-
-function finishProcess(data, res) {
-    let finalId = (data.type === 'تجميل نسائي') ? 'A' + res.id : 'B' + res.id;
-    const waMsg = `*طلب حجز موعد جديد*\n📌 الرقم: ${finalId}\n🩺 النوع: ${data.type}\n👤 الاسم: ${data.name}\n📱 الهاتف: ${data.phone}\n📅 اليوم المختار: ${data.bookingDate}\n⚠️ يرجى تأكيد ساعة الحضور`;
-    const waUrl = `https://wa.me/201125337717?text=${encodeURIComponent(waMsg)}`;
-    addMessage(`<div style="text-align:center; border:2px solid var(--primary-color); background: linear-gradient(135deg,#fff0f6,#ffe4ec); padding:20px; border-radius:28px;"><div style="font-size:1.25rem; font-weight:800; color:#be185d; margin-bottom:12px;">🎉 تم تسجيل طلبكِ بنجاح</div><div style="text-align:right; font-size:0.95rem; line-height:2.2; color:#334155;">📌 رقمك المرجعي: <b class="data-highlight">${finalId}</b><br>🩺 نوع الكشف: <b class="data-highlight">${data.type}</b><br>📅 اليوم المختار: <b class="data-highlight">${data.bookingDate}</b></div><hr style="margin:15px 0; border-top:1.5px solid #fbcfe8;"><div style="font-size:0.85rem; color:#dc2626; font-weight:800; margin-bottom:15px;">إدارة العيادة ستتواصل معكِ لتحديد الساعة<br>يرجى تأكيد الحجز عبر واتساب الآن</div><a href="${waUrl}" target="_blank" class="premium-wa-link">اضغطي هنا لتأكيد الحجز عبر واتساب</a></div>`);
-    setTimeout(() => { window.open(waUrl, "_blank"); }, 10000);
-}
-
-function startCalculator() {
-    document.getElementById('backBtn').style.display = 'flex';
-    document.getElementById('contentArea').innerHTML = '';
-    showTyping();
     setTimeout(() => {
         removeTyping();
-        addMessage(`<div id="calcInputBox" class="booking-form"><b style="color:var(--dark-pink); font-size:1.1rem;">🤰 حاسبة عمر الحمل</b><br>من فضلكِ اختاري تاريخ أول يوم لآخر دورة شهرية:<br><input type="date" id="lp" max="${new Date().toISOString().split('T')[0]}"><button class="option-btn" id="calcBtn" onclick="doCalc(this)">احسبي الآن ✨</button></div>`);
-    }, 400);
+
+        addMessage(`
+            <div style="text-align:center;">
+                <div style="font-size:2rem; color:var(--success-green);"><i class="fa-solid fa-circle-check"></i></div>
+                <h3 style="color:var(--dark-accent);">${i18n[currentLang].success}</h3>
+
+                <div class="details-box">
+                    <div class="detail-item"><span class="detail-label">${i18n[currentLang].name}:</span><span class="detail-value">${name}</span></div>
+                    <div class="detail-item"><span class="detail-label">${i18n[currentLang].phone}:</span><span class="detail-value">${phone}</span></div>
+                    <div class="detail-item"><span class="detail-label">${i18n[currentLang].date}:</span><span class="detail-value">${date}</span></div>
+                </div>
+
+                <a href="#" class="premium-wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Placeholder</a>
+                ${getBackButton()}
+            </div>
+        `);
+    }, 700);
 }
 
-function doCalc(btn) {
-    const d = document.getElementById("lp").value;
-    if (!d) { alert("من فضلكِ اختاري التاريخ أولاً 📅"); return; }
-    const totalDays = Math.floor((new Date() - new Date(d)) / (1000 * 60 * 60 * 24));
-    if (totalDays > 294 || totalDays < 0) { addMessage(`<div class="pregnancy-result" style="border:2px solid red; background: #fff1f2; animation: none;"><b style="color:red;">⚠️ التاريخ غير صحيح</b><br><br>يرجى اختيار تاريخ صحيح (أقصى حمل 42 أسبوع) 💗</div>`); return; }
-    document.getElementById('contentArea').innerHTML = '';
+function showSampleResult() {
+    contentArea.innerHTML = '';
     showTyping();
+
     setTimeout(() => {
         removeTyping();
-        const weeks = Math.floor(totalDays / 7), days = totalDays % 7, months = Math.floor(weeks / 4);
-        const deliveryDate = new Date(d); deliveryDate.setDate(deliveryDate.getDate() + 280);
-        addMessage(`<div class="pregnancy-result">✨ <b>أنتِ الآن في:</b><br><br><div class="main-number">${weeks} أسبوع و ${days} يوم</div><br>📅 الشهر ${months + 1} 👶<div class="delivery-date">📅 موعد الولادة المتوقع:<br><span style="font-size:1.1rem;">${deliveryDate.toLocaleDateString('ar-EG', {year:'numeric', month:'long', day:'numeric'})}</span></div><br>🤍 ربنا يتمم لكِ على خير</div>`);
-        setTimeout(() => { addMessage(`<button class="option-btn" onclick="startBooking()">📅 احجزيلي ميعاد الآن</button>`); }, 1000);
-    }, 800);
+
+        addMessage(`
+            <div style="text-align:center;">
+                <div class="status-badge">Sample Badge</div>
+                <h3 style="color:var(--dark-accent);">${i18n[currentLang].duplicated}</h3>
+                <p>نص مبهم للتجربة يمكن استبداله لاحقاً بأي محتوى.</p>
+                ${getBackButton()}
+            </div>
+        `);
+    }, 500);
 }
 
-function quickSend(text) {
-    document.getElementById('contentArea').innerHTML = '';
-    showTyping();
-    setTimeout(() => {
-        removeTyping();
-        addMessage(`أنا مساعدكِ الرقمي لخدمتكِ على مدار الساعة 🤍<br><br><button class="option-btn" onclick="goHome()">🏠 العودة للرئيسية</button>`);
-    }, 400);
+function checkNameInput(el) {
+    const err = document.getElementById("nameErr");
+    err.style.display = el.value.trim() && el.value.trim().split(/\s+/).length < 2 ? "block" : "none";
 }
 
-function checkNameInput(el) { document.getElementById("nameErr").style.display = el.value.trim().split(/\s+/).length < 3 ? "block" : "none"; }
-function checkPhoneInput(el) { document.getElementById("phoneErr").style.display = el.value.length < 11 ? "block" : "none"; }
-function toggleOther(v) { document.getElementById("otherArea").innerHTML = v === 'أخرى' ? `<input type="text" id="pOther" placeholder="عرفتينا منين ...">` : ""; }
-function addMessage(t) { const d = document.createElement("div"); d.className = "msg"; d.innerHTML = t; document.getElementById("contentArea").appendChild(d); document.getElementById("contentArea").scrollTop = 0; }
-function showTyping() { const d = document.createElement("div"); d.id = "typing"; d.className = "msg typing"; d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>'; document.getElementById("contentArea").appendChild(d); }
-function removeTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
-function handleVibrate() { if ("vibrate" in navigator) { navigator.vibrate(60); } }
-function shareApp(e){ e.preventDefault(); if (navigator.share) { navigator.share({ title: "دكتورة دعاء شعبان", url: window.location.href }); } else { navigator.clipboard.writeText(window.location.href); alert("تم النسخ 📋"); } }
+function checkPhoneInput(el) {
+    el.value = el.value.replace(/[^0-9]/g,'');
+    const err = document.getElementById("phoneErr");
+    err.style.display = el.value.length > 0 && el.value.length < 11 ? "block" : "none";
+}
+
+function addMessage(html) {
+    const d = document.createElement("div");
+    d.className = "msg";
+    d.innerHTML = html;
+    contentArea.appendChild(d);
+}
+
+function showTyping() {
+    const d = document.createElement("div");
+    d.id = "typing";
+    d.className = "typing";
+    d.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+    contentArea.appendChild(d);
+}
+
+function removeTyping() {
+    const t = document.getElementById("typing");
+    if (t) t.remove();
+}
+
+function handleVibrate() {
+    if ("vibrate" in navigator) navigator.vibrate(60);
+}
+
+function shareApp(e) {
+    e.preventDefault();
+    navigator.share ? navigator.share({ title: "Template", url: window.location.href }) : alert("Copied");
+}
 </script>
 </body>
 </html>
