@@ -1,284 +1,1030 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="aurora">
+<html lang="ar" data-lang="ar" data-mode="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بوابة الموظفين | Mr Mahmoud Delivery</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --cyan: #22d3ee;
-      --purple: #a855f7;
-      --gold: #facc15;
-      --panel: rgba(15, 23, 42, 0.6);
-      --border: rgba(255, 255, 255, 0.1);
-      --accent-gradient: linear-gradient(135deg, var(--cyan), var(--purple));
-    }
-    body {
-      font-family: 'Cairo', sans-serif;
-      min-height: 100vh;
-      color: white;
-      background:
-        radial-gradient(circle at top left, rgba(34,211,238,0.15), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 30%),
-        linear-gradient(145deg, #020617 0%, #07111f 100%);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    .glass {
-      background: var(--panel);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-    /* تنسيق الساعة الضخمة */
-    .giant-clock-container {
-      text-align: center;
-      margin: 40px 0;
-      text-shadow: 0 0 30px rgba(34,211,238,0.4);
-    }
-    .giant-time {
-      font-size: clamp(4rem, 12vw, 8rem);
-      font-weight: 900;
-      line-height: 1;
-      background: linear-gradient(to bottom, #ffffff, #94a3b8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 5px;
-    }
-    .giant-date {
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      color: var(--cyan);
-      font-weight: 700;
-      margin-top: 10px;
-    }
-    .input-field {
-      width: 100%; border-radius: 16px; background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border); padding: 16px; color: white;
-      font-size: 1.1rem; text-align: center; transition: 0.3s;
-    }
-    .input-field:focus { border-color: var(--cyan); box-shadow: 0 0 15px rgba(34,211,238,0.2); outline: none; }
-    
-    .btn {
-      width: 100%; border-radius: 16px; padding: 16px; font-size: 1.2rem;
-      font-weight: 900; cursor: pointer; transition: 0.3s; border: none;
-    }
-    .btn-primary { background: var(--accent-gradient); color: #020617; box-shadow: 0 0 20px rgba(168,85,247,0.3); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(168,85,247,0.5); }
-    .btn-danger { background: #ef4444; color: white; }
-    
-    .hidden { display: none !important; }
-    
-    .result-card {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px; margin-top: 15px; text-align: right;
-    }
-    .status-badge {
-      display: inline-block; padding: 4px 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem;
-      background: rgba(52,211,153,0.2); color: #34d399; border: 1px solid rgba(52,211,153,0.5);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" id="themeColor">
+<meta property="og:title" content="Future System | نظام الحجز الذكي الأحدث">
+<meta property="og:description" content="نظام حجز ذكي وقابل للتخصيص مع لوحة إدارة ومواعيد متاحة فعلياً.">
+<meta property="og:image" content="https://i.ibb.co/MKYJN8J/LOGO-Circal.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<title>Future Reservation System - Modern Cloud Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+    --primary: #4f46e5;
+    --secondary: #10b981;
+    --primary-hover: #4338ca;
+    --secondary-hover: #059669;
+    --bg-main: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-alt: #f1f5f9;
+    --text-main: #0f172a;
+    --text-soft: #64748b;
+    --border: #e2e8f0;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 8px;
+}
+
+[data-palette="ocean"] { --primary: #0284c7; --secondary: #0ea5e9; }
+[data-palette="berry"] { --primary: #e11d48; --secondary: #f43f5e; }
+[data-palette="sunset"] { --primary: #ea580c; --secondary: #f59e0b; }
+[data-palette="royal"] { --primary: #7e22ce; --secondary: #a855f7; }
+
+[data-mode="dark"] {
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-alt: #334155;
+    --text-main: #f8fafc;
+    --text-soft: #cbd5e1;
+    --border: #334155;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    background: var(--bg-main);
+    color: var(--text-main);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+body.en-mode { direction: ltr; }
+button, input, select, textarea { font: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* Scroll Progress & Toast */
+#scrollProgress { position: fixed; top: 0; left: 0; height: 4px; width: 0; z-index: 9999; background: var(--primary); transition: width 0.1s; }
+#toastContainer { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9998; display: grid; gap: 10px; pointer-events: none; width: min(400px, 90vw); }
+.toast { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: var(--radius); background: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); font-size: 0.95rem; font-weight: 700; animation: slideDown 0.4s ease forwards; }
+.toast i { font-size: 1.2rem; }
+.toast.success i { color: var(--success); }
+.toast.error i { color: var(--danger); }
+.toast.info i { color: var(--primary); }
+.toast.hiding { animation: slideUp 0.3s ease forwards; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUp { to { opacity: 0; transform: translateY(-20px); } }
+
+#backToTop { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; border: none; border-radius: 50%; background: var(--primary); color: #fff; box-shadow: var(--shadow-md); display: grid; place-items: center; opacity: 0; transform: translateY(20px); cursor: pointer; z-index: 300; transition: 0.3s; font-size: 1.2rem; }
+#backToTop.visible { opacity: 1; transform: translateY(0); }
+#backToTop:hover { background: var(--primary-hover); transform: translateY(-3px); }
+
+/* Splash Screen */
+#splash { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: var(--primary); color: #fff; transition: opacity 0.6s ease, visibility 0.6s; }
+#splash.hide { opacity: 0; visibility: hidden; }
+.splash-content { text-align: center; animation: pulseFade 2s infinite alternate; }
+.splash-content h1 { font-size: 3rem; margin: 0; font-weight: 900; letter-spacing: 1px; }
+.splash-content p { font-size: 1.2rem; margin: 10px 0 0; opacity: 0.9; }
+@keyframes pulseFade { from { transform: scale(0.98); opacity: 0.8; } to { transform: scale(1.02); opacity: 1; } }
+
+/* Layout & Typography */
+.inner { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+.section { padding: 80px 0; }
+.section-title { text-align: center; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-main); margin-bottom: 50px; position: relative; }
+.section-title::after { content: ""; display: block; width: 60px; height: 4px; background: var(--primary); margin: 15px auto 0; border-radius: 2px; }
+
+/* Top Navigation */
+.topbar { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: var(--bg-surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 1000; box-shadow: var(--shadow-sm); transition: background 0.3s; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-text strong { font-size: 1.4rem; font-weight: 900; color: var(--primary); }
+.brand-text span { font-size: 0.75rem; color: var(--text-soft); font-weight: 700; }
+.nav { display: flex; gap: 20px; }
+.nav a { color: var(--text-main); font-weight: 700; font-size: 0.95rem; transition: color 0.2s; }
+.nav a:hover { color: var(--primary); }
+.nav a.special-nav { color: var(--primary); padding: 4px 12px; background: var(--bg-alt); border-radius: var(--radius); }
+.top-actions { display: flex; gap: 10px; align-items: center; }
+.action-btn { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-main); width: 40px; height: 40px; border-radius: var(--radius); display: grid; place-items: center; cursor: pointer; transition: 0.2s; font-size: 1.1rem; }
+.action-btn:hover { background: var(--border); color: var(--primary); }
+.action-btn.lang-btn { width: auto; padding: 0 15px; font-weight: 700; font-size: 0.9rem; display: flex; gap: 8px; }
+
+/* Menus */
+.dropdown-menu { position: absolute; top: 80px; left: 20px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 15px; display: none; gap: 10px; flex-wrap: wrap; width: 200px; z-index: 1000; }
+.dropdown-menu.show { display: flex; }
+.swatch { width: 35px; height: 35px; border-radius: 50%; border: none; cursor: pointer; transition: transform 0.2s; }
+.swatch:hover { transform: scale(1.1); }
+.swatch.ocean { background: #0ea5e9; }
+.swatch.berry { background: #e11d48; }
+.swatch.sunset { background: #ea580c; }
+.swatch.royal { background: #7e22ce; }
+.swatch.default { background: #4f46e5; }
+
+.mobile-menu-btn { display: none; }
+.mobile-menu { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-surface); border-bottom: 1px solid var(--border); flex-direction: column; padding: 20px; box-shadow: var(--shadow-md); z-index: 999; }
+.mobile-menu.show { display: flex; }
+.mobile-menu a { padding: 12px 0; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border); }
+.mobile-menu a:last-child { border-bottom: none; }
+
+/* Hero Section */
+.hero { padding: 160px 20px 100px; min-height: 90vh; display: flex; align-items: center; background: linear-gradient(to bottom, var(--bg-alt), var(--bg-main)); position: relative; overflow: hidden; }
+.hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.2; margin: 0 0 20px; color: var(--text-main); }
+.hero-content h1 span { color: var(--primary); }
+.hero-content p { font-size: 1.2rem; color: var(--text-soft); margin: 0 0 40px; font-weight: 500; }
+.hero-actions { display: flex; gap: 15px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 24px; height: 50px; border-radius: var(--radius); font-weight: 700; cursor: pointer; transition: 0.3s; border: none; font-size: 1rem; }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4); }
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5); }
+.btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text-main); }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.hero-visual { position: relative; }
+.hero-card { background: var(--bg-surface); border-radius: 16px; padding: 30px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); position: relative; z-index: 2; transform: perspective(1000px) rotateY(-5deg); transition: transform 0.5s ease; }
+.en-mode .hero-card { transform: perspective(1000px) rotateY(5deg); }
+.hero-card:hover { transform: perspective(1000px) rotateY(0deg); }
+.hero-card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+.hero-card-header i { font-size: 2rem; color: var(--secondary); }
+.hero-card-header h3 { margin: 0; font-size: 1.2rem; }
+.mock-line { height: 12px; background: var(--bg-alt); border-radius: 6px; margin-bottom: 12px; }
+.mock-line.short { width: 60%; }
+.blob { position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: var(--primary); border-radius: 50%; filter: blur(80px); opacity: 0.2; z-index: 1; }
+
+/* Stats */
+.stats-band { background: var(--primary); color: #fff; padding: 60px 0; }
+.stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto; text-align: center; }
+.stat b { display: block; font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+.stat span { font-size: 1.1rem; font-weight: 500; opacity: 0.9; }
+.live-clock-box { text-align: center; margin-bottom: 40px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: var(--radius); display: inline-block; position: relative; left: 50%; transform: translateX(-50%); }
+.live-clock-box .time { font-size: 2.5rem; font-weight: 900; letter-spacing: 2px; }
+.live-clock-box .date { font-size: 1rem; opacity: 0.8; }
+
+/* Features Grid */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.feature-card { background: var(--bg-surface); padding: 40px 30px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; align-items: flex-start; }
+.feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.feature-icon { width: 60px; height: 60px; background: var(--bg-alt); border-radius: 12px; display: grid; place-items: center; font-size: 1.8rem; color: var(--primary); margin-bottom: 20px; }
+.feature-card h3 { font-size: 1.3rem; margin: 0 0 15px; font-weight: 800; }
+.feature-card p { margin: 0; color: var(--text-soft); }
+
+/* Portal Grid */
+.portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 60px; }
+.portal-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-md); text-align: center; }
+.portal-card h3 { font-size: 1.5rem; color: var(--primary); margin: 0 0 15px; }
+.portal-card p { color: var(--text-soft); margin: 0 0 25px; }
+.portal-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+/* Booking Section */
+.booking-section { background: var(--bg-alt); padding: 100px 0; }
+.booking-container { max-width: 800px; margin: 0 auto; background: var(--bg-surface); border-radius: 16px; box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid var(--border); }
+.booking-header { background: var(--primary); padding: 30px; color: #fff; text-align: center; }
+.booking-header h2 { margin: 0 0 10px; font-size: 2rem; font-weight: 800; }
+.booking-header p { margin: 0; opacity: 0.9; }
+.booking-body { padding: 40px; }
+
+/* Activities Grid */
+.activity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+.act-card { background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px 15px; text-align: center; cursor: pointer; transition: 0.2s; color: var(--text-main); font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.act-card i { font-size: 2rem; color: var(--text-soft); transition: 0.2s; }
+.act-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+.act-card:hover i { color: var(--primary); }
+.act-card.vip { grid-column: 1 / -1; flex-direction: row; justify-content: center; background: linear-gradient(to right, var(--bg-surface), var(--bg-alt)); border-color: var(--secondary); color: var(--secondary); }
+.act-card.idea-card { grid-column: 1 / -1; flex-direction: row; justify-content: center; border-style: dashed; }
+
+/* Form Fields */
+.form-grid { display: grid; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.field-group { display: flex; flex-direction: column; gap: 8px; }
+.field-group label { font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+.field-group input, .field-group select, .field-group textarea { width: 100%; padding: 14px 16px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-main); transition: 0.2s; font-family: inherit; }
+.field-group input:focus, .field-group textarea:focus { border-color: var(--primary); background: var(--bg-surface); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+.field-group textarea { resize: vertical; min-height: 120px; }
+.field-group.error input, .field-group.error textarea { border-color: var(--danger); }
+.error-msg { font-size: 0.8rem; color: var(--danger); font-weight: 700; display: none; }
+.field-group.error .error-msg { display: block; }
+
+/* Time Slots */
+.time-slots { display: flex; flex-wrap: wrap; gap: 10px; }
+.slot-btn { padding: 10px 16px; border: 1px solid var(--border); background: var(--bg-surface); border-radius: var(--radius); cursor: pointer; font-weight: 700; color: var(--text-main); transition: 0.2s; }
+.slot-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+.slot-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary); }
+.slot-btn:disabled { opacity: 0.5; text-decoration: line-through; cursor: not-allowed; background: var(--bg-alt); }
+
+/* Info Alert */
+.info-alert { background: var(--bg-alt); border-right: 4px solid var(--secondary); padding: 15px 20px; border-radius: var(--radius); margin-bottom: 25px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; font-weight: 700; font-size: 0.9rem; }
+.en-mode .info-alert { border-right: none; border-left: 4px solid var(--secondary); }
+.info-alert div { display: flex; align-items: center; gap: 8px; }
+.info-alert i { color: var(--secondary); }
+
+/* Upload & Checkbox */
+.checkbox-wrap { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; }
+.checkbox-wrap input { width: 18px; height: 18px; accent-color: var(--primary); }
+.upload-area { border: 2px dashed var(--border); padding: 20px; text-align: center; border-radius: var(--radius); display: none; margin-top: 10px; background: var(--bg-alt); }
+.demo-box { border: 1px solid var(--primary); background: rgba(79, 70, 229, 0.05); padding: 20px; border-radius: var(--radius); margin-top: 10px; }
+
+/* Form Actions */
+.form-actions { display: flex; gap: 15px; margin-top: 30px; }
+.form-actions .btn { flex: 1; }
+
+/* Result Card */
+.result-card { text-align: center; padding: 20px 0; }
+.result-icon { font-size: 4rem; margin-bottom: 20px; }
+.result-icon.success { color: var(--success); }
+.result-icon.warning { color: var(--secondary); }
+.result-card h2 { font-size: 2rem; margin: 0 0 10px; }
+.details-list { background: var(--bg-alt); border-radius: var(--radius); padding: 20px; text-align: right; margin: 30px 0; }
+.en-mode .details-list { text-align: left; }
+.detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-weight: 700; font-size: 0.95rem; }
+.detail-row:last-child { border-bottom: none; }
+.badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; background: var(--bg-surface); border: 1px solid var(--border); }
+.badge.primary { background: rgba(79, 70, 229, 0.1); color: var(--primary); border-color: rgba(79, 70, 229, 0.2); }
+
+/* Admin Section */
+.admin-panel-wrap { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); overflow: hidden; }
+.admin-login { padding: 60px 20px; max-width: 400px; margin: 0 auto; text-align: center; }
+.admin-login h3 { font-size: 1.8rem; margin: 0 0 10px; color: var(--text-main); }
+.admin-toolbar { padding: 20px; background: var(--bg-alt); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto auto auto; gap: 15px; align-items: center; }
+.admin-toolbar input, .admin-toolbar select { padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-surface); color: var(--text-main); }
+.table-responsive { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; min-width: 900px; text-align: right; }
+.en-mode .admin-table { text-align: left; }
+.admin-table th, .admin-table td { padding: 15px 20px; border-bottom: 1px solid var(--border); }
+.admin-table th { background: var(--bg-surface); font-weight: 800; color: var(--text-soft); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+.admin-table tr:hover td { background: var(--bg-alt); }
+.status-select { padding: 6px 10px; border-radius: 20px; border: 1px solid var(--border); font-weight: 700; font-size: 0.85rem; background: var(--bg-surface); color: inherit; cursor: pointer; }
+.wa-link { color: #25d366; font-size: 1.2rem; display: inline-block; transition: 0.2s; }
+.wa-link:hover { transform: scale(1.1); }
+
+/* Works & Testimonials */
+.works-grid, .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.work-card { border-radius: var(--radius); overflow: hidden; background: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: 0.3s; }
+.work-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.work-img { height: 200px; background-size: cover; background-position: center; border-bottom: 1px solid var(--border); }
+.work-info { padding: 25px; }
+.work-info h3 { margin: 0 0 10px; font-size: 1.3rem; color: var(--primary); }
+.work-info p { color: var(--text-soft); font-size: 0.95rem; margin: 0 0 20px; }
+.testimonial-card { background: var(--bg-surface); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border); position: relative; }
+.testimonial-card::before { content: "\f10e"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; top: 20px; left: 20px; font-size: 2rem; color: var(--bg-alt); }
+.en-mode .testimonial-card::before { right: 20px; left: auto; content: "\f10d"; }
+.client-info { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.client-avatar { width: 50px; height: 50px; background: var(--primary); color: #fff; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 1.2rem; }
+.client-details strong { display: block; font-size: 1.1rem; }
+.client-details span { font-size: 0.85rem; color: var(--text-soft); }
+
+/* Footer */
+.footer { background: var(--bg-surface); border-top: 1px solid var(--border); padding: 60px 20px 30px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+.footer-col { flex: 1; min-width: 250px; }
+.footer-brand { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 15px; line-height: 1.1; }
+.social-links { display: flex; gap: 15px; margin-top: 20px; }
+.social-links a { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); color: var(--text-main); display: grid; place-items: center; transition: 0.3s; }
+.social-links a:hover { background: var(--primary); color: #fff; transform: translateY(-3px); }
+.footer-bottom { text-align: center; padding-top: 30px; margin-top: 40px; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text-soft); font-weight: 700; }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; place-items: center; z-index: 10000; padding: 20px; }
+.modal-overlay.show { display: grid; }
+.modal-box { background: var(--bg-surface); padding: 40px 30px; border-radius: var(--radius); max-width: 400px; width: 100%; text-align: center; box-shadow: var(--shadow-lg); animation: slideDown 0.3s; }
+.modal-box i { font-size: 3rem; color: var(--danger); margin-bottom: 20px; }
+
+@media (max-width: 900px) {
+    .nav { display: none; }
+    .mobile-menu-btn { display: grid; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-actions { justify-content: center; }
+    .admin-toolbar { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+}
+
+/* Animations */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+</style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-  <!-- شاشة تسجيل الدخول -->
-  <div id="loginView" class="max-w-md mx-auto w-full mt-10">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-black text-white">بوابة الموظفين</h1>
-      <p class="text-slate-400 mt-2">تسجيل حضور ومتابعة الطلبات</p>
+<div id="scrollProgress"></div>
+<div id="toastContainer"></div>
+<button id="backToTop" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div id="splash">
+    <div class="splash-content">
+        <h1>Future System</h1>
+        <p>Smart Booking Solutions</p>
     </div>
+</div>
 
-    <!-- الساعة الضخمة -->
-    <div class="giant-clock-container">
-      <div class="giant-time" id="loginClock">00:00</div>
-      <div class="giant-date" id="loginDate">التاريخ</div>
+<header class="topbar">
+    <div class="brand-text">
+        <strong data-i18n="brandTitle">Future System</strong>
+        <span data-i18n="brandSub">Smart Booking Platform</span>
     </div>
-
-    <div class="glass p-8">
-      <form id="loginForm" class="space-y-6">
-        <div>
-          <label class="block text-slate-300 font-bold mb-2">كود الموظف (ID)</label>
-          <input type="text" id="empCode" class="input-field" placeholder="مثال: A01" required>
-        </div>
-        <div>
-          <label class="block text-slate-300 font-bold mb-2">كلمة المرور</label>
-          <input type="password" id="empPass" class="input-field" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-4" id="loginBtn">
-          تسجيل الحضور (Start Shift)
+    <nav class="nav">
+        <a href="#features" data-i18n="navFeatures">المميزات</a>
+        <a href="#booking" data-i18n="navTry">جرب النظام</a>
+        <a href="#admin" data-i18n="navAdmin">الإدارة</a>
+        <a href="#works" data-i18n="navWorks">أعمالنا</a>
+        <a href="#contact" data-i18n="navContact">تواصل معنا</a>
+    </nav>
+    <div class="top-actions">
+        <button class="action-btn lang-btn" onclick="toggleLanguage()">
+            <i class="fa-solid fa-globe"></i> <span id="langText">EN</span>
         </button>
-        <div id="loginMsg" class="text-center text-red-400 font-bold hidden"></div>
-      </form>
+        <button class="action-btn" onclick="toggleDarkMode()" id="darkBtn"><i class="fa-solid fa-moon"></i></button>
+        <button class="action-btn" onclick="togglePaletteMenu()" id="paletteBtn"><i class="fa-solid fa-palette"></i></button>
+        <button class="action-btn mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
     </div>
-  </div>
-
-  <!-- لوحة تحكم الموظف (تظهر بعد الدخول) -->
-  <div id="dashboardView" class="max-w-4xl mx-auto w-full hidden">
-    <div class="glass p-6 flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-      <div>
-        <h2 class="text-2xl font-black text-cyan-300">أهلاً، <span id="empNameDisplay"></span> 👋</h2>
-        <p class="text-slate-400 text-sm mt-1">شيفت سعيد! يمكنك البحث عن طلبات العملاء هنا.</p>
-      </div>
-      <button onclick="endShift()" class="btn btn-danger w-auto px-8 py-3 text-sm rounded-xl">
-        تسجيل انصراف (End Shift) <i class="fa-solid fa-right-from-bracket mr-2"></i>
-      </button>
+    
+    <div class="dropdown-menu" id="paletteMenu">
+        <button class="swatch default" onclick="setPalette('default')"></button>
+        <button class="swatch ocean" onclick="setPalette('ocean')"></button>
+        <button class="swatch berry" onclick="setPalette('berry')"></button>
+        <button class="swatch sunset" onclick="setPalette('sunset')"></button>
+        <button class="swatch royal" onclick="setPalette('royal')"></button>
     </div>
 
-    <div class="glass p-6 md:p-10 text-center">
-      <i class="fa-solid fa-magnifying-glass text-5xl text-purple-400 mb-4 opacity-50"></i>
-      <h3 class="text-2xl font-black mb-6">البحث في الطلبات</h3>
-      
-      <form id="searchForm" class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-        <input type="tel" id="searchPhone" class="input-field" placeholder="أدخل رقم هاتف العميل (مثال: 010...)" required>
-        <button type="submit" class="btn btn-primary md:w-auto px-8" id="searchBtn">
-          بحث
-        </button>
-      </form>
-      <div id="searchMsg" class="text-center text-red-400 font-bold mt-4 hidden"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" onclick="toggleMobileMenu()" data-i18n="navFeatures">المميزات</a>
+        <a href="#booking" onclick="toggleMobileMenu()" data-i18n="navTry">جرب النظام</a>
+        <a href="#admin" onclick="toggleMobileMenu()" data-i18n="navAdmin">الإدارة</a>
+        <a href="#works" onclick="toggleMobileMenu()" data-i18n="navWorks">أعمالنا</a>
+        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="navContact">تواصل معنا</a>
     </div>
+</header>
 
-    <!-- منطقة عرض نتائج البحث -->
-    <div id="searchResults" class="mt-8 space-y-4"></div>
-  </div>
-
-  <script>
-    // ⚠️ ضع رابط السكربت الخاص بك هنا ⚠️
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfGq8zhBBBmGWs_A_BPSLA3770tpAKPpHTumJ8G4XK-p1TX5m6a75WBntBRipv_bVN/exec";
-
-    let loggedInEmpCode = "";
-
-    // تحديث الساعة الحية
-    function updateClock() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute:'2-digit', second:'2-digit' });
-      const dateString = now.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      
-      document.getElementById("loginClock").innerText = timeString;
-      document.getElementById("loginDate").innerText = dateString;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // تسجيل الدخول
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const code = document.getElementById("empCode").value.trim();
-      const pass = document.getElementById("empPass").value.trim();
-      const btn = document.getElementById("loginBtn");
-      const msg = document.getElementById("loginMsg");
-
-      btn.innerText = "جاري التحقق...";
-      btn.disabled = true;
-      msg.classList.add("hidden");
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ action: "login", empCode: code, password: pass })
-        });
-        const result = await response.json();
-
-        if (result.status === "success") {
-          loggedInEmpCode = code;
-          document.getElementById("empNameDisplay").innerText = result.data.name;
-          document.getElementById("loginView").classList.add("hidden");
-          document.getElementById("dashboardView").classList.remove("hidden");
-        } else {
-          msg.innerText = result.message;
-          msg.classList.remove("hidden");
-        }
-      } catch (err) {
-        msg.innerText = "حدث خطأ في الاتصال بالخادم.";
-        msg.classList.remove("hidden");
-      } finally {
-        btn.innerText = "تسجيل الحضور (Start Shift)";
-        btn.disabled = false;
-      }
-    });
-
-    // تسجيل الانصراف
-    async function endShift() {
-      if (!confirm("هل أنت متأكد من إنهاء الشيفت وتسجيل الانصراف؟")) return;
-      
-      try {
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ action: "logout", empCode: loggedInEmpCode })
-        });
-        
-        // إعادة الواجهة للوضع الأصلي
-        loggedInEmpCode = "";
-        document.getElementById("empCode").value = "";
-        document.getElementById("empPass").value = "";
-        document.getElementById("dashboardView").classList.add("hidden");
-        document.getElementById("loginView").classList.remove("hidden");
-        document.getElementById("searchResults").innerHTML = "";
-        alert("تم تسجيل الخروج بنجاح.");
-      } catch(err) {
-        alert("خطأ في تسجيل الخروج.");
-      }
-    }
-
-    // البحث عن طلب
-    document.getElementById("searchForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const phone = document.getElementById("searchPhone").value.trim();
-      const btn = document.getElementById("searchBtn");
-      const msg = document.getElementById("searchMsg");
-      const resultsDiv = document.getElementById("searchResults");
-
-      btn.innerText = "جاري...";
-      btn.disabled = true;
-      msg.classList.add("hidden");
-      resultsDiv.innerHTML = "";
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ action: "search", phone: phone })
-        });
-        const result = await response.json();
-
-        if (result.status === "success") {
-          let html = `<h4 class="text-xl font-bold mb-4 text-cyan-200">نتائج البحث (${result.data.length} طلبات):</h4>`;
-          result.data.forEach(req => {
-            html += `
-              <div class="result-card">
-                <div class="flex justify-between items-start mb-4 border-b border-white/10 pb-4">
-                  <div>
-                    <h5 class="text-xl font-black text-gold">${req.id}</h5>
-                    <p class="text-slate-400 text-sm mt-1"><i class="fa-regular fa-clock"></i> ${req.timestamp}</p>
-                  </div>
-                  <div class="status-badge">${req.status || "قيد الانتظار"}</div>
+<section class="hero" id="home">
+    <div class="blob"></div>
+    <div class="hero-inner">
+        <div class="hero-content reveal">
+            <h1 data-i18n="heroText">نظام حجز <span>ذكي</span> وسهل لتنظيم مواعيدك</h1>
+            <p data-i18n="heroSub">نظام يساعدك تنظم المواعيد، تقلل التكرار، وتقدم تجربة سلسة وسريعة لعملائك بتصميم عصري.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="goToBookingDemo()"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="heroTry">ابدأ التجربة</span></button>
+                <a class="btn btn-outline" href="#clientPortal"><i class="fa-solid fa-laptop-code"></i> <span data-i18n="navWorks">اكتشف المزيد</span></a>
+            </div>
+        </div>
+        <div class="hero-visual reveal">
+            <div class="hero-card">
+                <div class="hero-card-header">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <h3>واجهة الحجز</h3>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
-                  <div><span class="text-slate-400">الخدمة:</span> <span class="text-white">${req.serviceType}</span></div>
-                  <div><span class="text-slate-400">رقم العميل:</span> <span class="text-cyan-300">${req.phone}</span></div>
-                  <div class="md:col-span-2"><span class="text-slate-400">التفاصيل:</span> <p class="text-white mt-1 bg-black/30 p-3 rounded-lg leading-relaxed">${req.details}</p></div>
+                <div class="mock-line"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line short"></div>
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <div style="width:40px; height:40px; border-radius:8px; background:var(--primary); opacity:0.8;"></div>
+                    <div style="width:40px; height:40px; border-radius:8px; background:var(--bg-alt);"></div>
+                    <div style="width:40px; height:40px; border-radius:8px; background:var(--bg-alt);"></div>
                 </div>
-              </div>
-            `;
-          });
-          resultsDiv.innerHTML = html;
-        } else {
-          msg.innerText = result.message;
-          msg.classList.remove("hidden");
-        }
-      } catch (err) {
-        msg.innerText = "حدث خطأ في البحث.";
-        msg.classList.remove("hidden");
-      } finally {
-        btn.innerText = "بحث";
-        btn.disabled = false;
-      }
+                <div style="margin-top:20px; height:40px; border-radius:8px; background:var(--bg-alt); width:100%;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-band">
+    <div class="live-clock-box reveal">
+        <div class="time" id="liveClock">--:--</div>
+        <div class="date" id="liveDate">----</div>
+    </div>
+    <div class="stats-grid reveal">
+        <div class="stat"><b id="stat1">+0</b><span data-i18n="statOne">نشاط مناسب</span></div>
+        <div class="stat"><b id="stat2">+0</b><span data-i18n="statTwo">حجز مسجل</span></div>
+        <div class="stat"><b id="stat3">+0</b><span data-i18n="statThree">نظام مخصص</span></div>
+    </div>
+</section>
+
+<section class="section" id="clientPortal">
+    <div class="inner">
+        <div class="portal-grid reveal">
+            <div class="portal-card">
+                <h3 data-i18n="clientLinkTitle">رابط العميل المباشر</h3>
+                <p data-i18n="clientLinkText">انسخ الرابط وشاركه لتجربة الحجز كعميل خارجي تماماً.</p>
+                <div class="portal-actions">
+                    <button class="btn btn-primary" onclick="goToBookingDemo()"><i class="fa-solid fa-desktop"></i> <span data-i18n="openClientBooking">فتح الحجز</span></button>
+                    <button class="btn btn-outline" onclick="copyClientLink(this)"><i class="fa-solid fa-link"></i> <span data-i18n="copyClientLink">نسخ الرابط</span></button>
+                </div>
+            </div>
+            <div class="portal-card">
+                <h3 data-i18n="adminAccessTitle">لوحة التحكم</h3>
+                <p data-i18n="adminAccessText">تابع الحجوزات وعدل الحالات من خلال لوحة إدارة متكاملة.</p>
+                <div class="portal-actions">
+                    <a class="btn btn-primary" href="#admin"><i class="fa-solid fa-lock"></i> <span data-i18n="adminLoginBtn">دخول الإدارة</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="features" style="background: var(--bg-surface);">
+    <div class="inner">
+        <h2 class="section-title reveal" data-i18n="featuresTitle">لماذا Future System؟</h2>
+        <div class="features-grid" id="featuresGrid"></div>
+    </div>
+</section>
+
+<section class="booking-section" id="booking">
+    <div class="inner">
+        <h2 class="section-title reveal" data-i18n="navTry">نموذج الحجز التجريبي</h2>
+        <div class="booking-container reveal" id="bookingStage">
+            </div>
+    </div>
+</section>
+
+<section class="section" id="admin">
+    <div class="inner">
+        <h2 class="section-title reveal" data-i18n="adminTitle">إدارة النظام</h2>
+        <div class="admin-panel-wrap reveal" id="adminPanel">
+            </div>
+    </div>
+</section>
+
+<section class="section" id="works" style="background: var(--bg-surface);">
+    <div class="inner">
+        <h2 class="section-title reveal" data-i18n="worksTitle">نماذج أعمالنا</h2>
+        <div class="works-grid">
+            <div class="work-card reveal">
+                <div class="work-img" style="background-image: url('https://i.ibb.co/NgNZPHsB/Bannar-1.png');"></div>
+                <div class="work-info">
+                    <h3 data-i18n="doctorWorkTitle">عيادة طبية متخصصة</h3>
+                    <p data-i18n="doctorWorkText">نظام حجز مواعيد دقيق يمنع التكرار ويوفر لوحة بيانات للطبيب والسكرتارية.</p>
+                    <a href="https://dokyy2.github.io/DrDoaaShaban/" target="_blank" class="btn btn-outline" style="width:100%;"><span data-i18n="doctorWorkBtn">معاينة النظام</span> <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+            <div class="work-card reveal">
+                <div class="work-img" style="background-image: url('https://i.ibb.co/r2gY7y29/smart-assistant.png');"></div>
+                <div class="work-info">
+                    <h3 data-i18n="workCardTitle">المساعد الذكي للخدمات</h3>
+                    <p data-i18n="workCardText">مساعد رقمي يوجه العملاء للخدمات والأوراق المطلوبة ويسهل الإجراءات.</p>
+                    <a href="https://dokyy2.github.io/smart-assistant/" target="_blank" class="btn btn-outline" style="width:100%;"><span data-i18n="workCardBtn">معاينة النظام</span> <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="testimonials">
+    <div class="inner">
+        <h2 class="section-title reveal" data-i18n="testimonialsTitle">آراء شركائنا</h2>
+        <div class="testimonials-grid" id="testimonialsGrid"></div>
+    </div>
+</section>
+
+<footer class="footer" id="contact">
+    <div class="footer-inner reveal">
+        <div class="footer-col">
+            <div class="footer-brand">Future System</div>
+            <p style="color: var(--text-soft); font-weight: 500;">الحل الأمثل لإدارة حجوزاتك ومواعيدك بطريقة احترافية وعصرية.</p>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3 style="margin-top:0;">تواصل معنا</h3>
+            <ul style="list-style:none; padding:0; margin:0; line-height:2.5; font-weight:700; color:var(--text-soft);">
+                <li><i class="fa-solid fa-phone" style="color:var(--primary); width:25px;"></i> 01122750229</li>
+                <li><i class="fa-solid fa-envelope" style="color:var(--primary); width:25px;"></i> futureRsBooker@gmail.com</li>
+                <li><i class="fa-solid fa-location-dot" style="color:var(--primary); width:25px;"></i> القاهرة، مصر</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Future Reservation System. Designed by Eng. Bassem Ashraf.
+    </div>
+</footer>
+
+<div class="modal-overlay" id="holidayModal">
+    <div class="modal-box">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <h3 id="holidayTitle">عطلة رسمية</h3>
+        <p id="holidayText" style="color:var(--text-soft); margin-bottom:25px;">هذا اليوم غير متاح للحجز، يرجى اختيار يوم آخر.</p>
+        <button class="btn btn-primary" style="width:100%;" onclick="closeModal('holidayModal')" id="holidayBtn">موافق</button>
+    </div>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwh2ORuyVzyXKNACq7a0Jy7YfhWskcVMDmj_yHfloPylj8JeFnwWkHTHofnoP1udckc/exec";
+const ADMIN_WHATSAPP = "201122750229";
+const STORE_PREFIX = "future_modern_";
+const bookingStage = document.getElementById("bookingStage");
+const adminPanel = document.getElementById("adminPanel");
+let selectedActivityId = "";
+let selectedActivityName = "";
+let selectedTime = "";
+let currentLang = "ar";
+let adminAuthed = false;
+let statsAnimated = false;
+const timeSlots = ["10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"];
+
+const activitiesList = [
+    { id:"clinic", ar:"عيادة طبية", en:"Medical Clinic", icon:"fa-stethoscope" },
+    { id:"dental", ar:"مركز أسنان", en:"Dental Center", icon:"fa-tooth" },
+    { id:"physio", ar:"مركز علاج طبيعي", en:"Physiotherapy", icon:"fa-bone" },
+    { id:"consult", ar:"مكتب استشارات", en:"Consulting Office", icon:"fa-briefcase" },
+    { id:"edu", ar:"سنتر تعليمي", en:"Education Center", icon:"fa-graduation-cap" },
+    { id:"salon", ar:"صالون أو سبا", en:"Salon or Spa", icon:"fa-scissors" },
+    { id:"service", ar:"شركة خدمات", en:"Service Company", icon:"fa-building" },
+    { id:"online", ar:"أعمال أونلاين", en:"Online Business", icon:"fa-globe" }
+];
+
+const dict = {
+    ar: {
+        brandTitle:"Future System", brandSub:"Smart Booking Platform",
+        navFeatures:"المميزات", navTry:"الحجز التجريبي", navWorks:"أعمالنا", navContact:"تواصل معنا", navAdmin:"لوحة الإدارة",
+        heroText:"نظام حجز <span>ذكي</span> لتنظيم أعمالك", heroSub:"نظام يساعدك تنظم المواعيد، تقلل التكرار، وتقدم تجربة سلسة وسريعة لعملائك بتصميم عصري.", heroTry:"ابدأ التجربة الآن",
+        clientLinkTitle:"رابط العميل المباشر", clientLinkText:"انسخ الرابط وشاركه لتجربة الحجز كعميل خارجي تماماً.", openClientBooking:"فتح الحجز", copyClientLink:"نسخ الرابط",
+        adminAccessTitle:"لوحة التحكم", adminAccessText:"تابع الحجوزات وعدل الحالات من خلال لوحة إدارة متكاملة.", adminLoginBtn:"دخول الإدارة",
+        statOne:"نشاط مناسب", statTwo:"حجز مسجل", statThree:"نظام مخصص",
+        featuresTitle:"لماذا Future System؟", worksTitle:"نماذج أعمالنا", adminTitle:"إدارة النظام",
+        doctorWorkTitle:"عيادة طبية متخصصة", doctorWorkText:"نظام حجز مواعيد دقيق يمنع التكرار ويوفر لوحة بيانات للطبيب والسكرتارية.", doctorWorkBtn:"معاينة النظام",
+        workCardTitle:"المساعد الذكي للخدمات", workCardText:"مساعد رقمي يوجه العملاء للخدمات والأوراق المطلوبة ويسهل الإجراءات.", workCardBtn:"معاينة النظام",
+        activityTitle:"اختر نوع نشاطك", activitySub:"اختر النشاط المناسب لتجربة نموذج الحجز المخصص",
+        bookingTitle:"سجل بيانات الحجز", bookingSub:"يرجى إكمال البيانات التالية لتأكيد موعدك لـ:",
+        fullName:"الاسم الكامل", phone:"رقم الهاتف", phone2:"رقم هاتف إضافي (اختياري)", date:"تاريخ الحجز", time:"وقت الحجز", message:"ملاحظات إضافية",
+        namePh:"الاسم ثنائي على الأقل", phonePh:"مثال: 01xxxxxxxxx", msgPh:"اكتب أي ملاحظات أو استفسارات هنا...",
+        nameErr:"مطلوب إدخال الاسم ثنائي", phoneErr:"رقم الهاتف يجب أن يكون 11 رقم", dateErr:"يرجى تحديد التاريخ", timeErr:"يرجى تحديد الوقت",
+        submit:"تأكيد الحجز", back:"الرجوع للأنشطة", newBooking:"إجراء حجز جديد", sendWa:"تواصل واتساب",
+        progressTitle:"جاري معالجة الطلب...", confirmTitle:"تم تأكيد حجزك بنجاح!", confirmSub:"تم تسجيل بياناتك. إليك تفاصيل الحجز:",
+        bookingId:"رقم المرجع", activityLabel:"النشاط", failText:"تم حفظ الحجز محلياً.", duplicateSlot:"عفواً، هذا الموعد تم حجزه للتو.", duplicateBooking:"حجز مكرر مسبقاً", duplicateNote:"لقد قمت بالحجز مسبقاً بنفس رقم الهاتف.",
+        holidayTitle:"عطلة رسمية", holidayText:"هذا اليوم غير متاح للحجز، يرجى اختيار يوم آخر.", holidayBtn:"موافق",
+        copied:"تم النسخ!", copyLabel:"نسخ", emailDemo:"البريد الإلكتروني للإيصال (اختياري)",
+        adminSearch:"بحث (الاسم، الهاتف، الرقم)", allStatuses:"جميع الحالات", statusNew:"جديد", statusConfirmed:"مؤكد", statusCanceled:"ملغي", statusDuplicate:"مكرر",
+        exportCsv:"تصدير بيانات CSV", clearDemo:"مسح الديمو", noRows:"لا توجد حجوزات مسجلة.", total:"الإجمالي", today:"حجوزات اليوم", confirmed:"المؤكدة",
+        adminUser:"اسم المستخدم", adminPass:"كلمة المرور", adminLogin:"تسجيل الدخول", adminLogout:"تسجيل خروج", adminLoginHint:"بيانات الدخول التجريبية: ADMIN / ADMIN", adminLoginError:"البيانات غير صحيحة", missingFields:"يرجى إكمال الحقول الإلزامية المطلوبة",
+        testimonialsTitle:"آراء شركائنا"
+    },
+    en: {
+        brandTitle:"Future System", brandSub:"Smart Booking Platform",
+        navFeatures:"Features", navTry:"Demo", navWorks:"Works", navContact:"Contact", navAdmin:"Admin",
+        heroText:"<span>Smart</span> booking system for your business", heroSub:"Organize appointments, reduce duplicates, and offer a smooth, modern experience to your clients.", heroTry:"Start Demo Now",
+        clientLinkTitle:"Direct Client Link", clientLinkText:"Copy and share to test the booking experience as an external client.", openClientBooking:"Open Booking", copyClientLink:"Copy Link",
+        adminAccessTitle:"Dashboard", adminAccessText:"Track and manage bookings through a fully integrated admin panel.", adminLoginBtn:"Admin Login",
+        statOne:"Activities", statTwo:"Bookings", statThree:"Custom Systems",
+        featuresTitle:"Why Future System?", worksTitle:"Our Portfolio", adminTitle:"System Management",
+        doctorWorkTitle:"Specialized Clinic", doctorWorkText:"Accurate booking system preventing duplicates with a dedicated dashboard.", doctorWorkBtn:"View Demo",
+        workCardTitle:"Smart Assistant", workCardText:"Digital assistant guiding clients through services and required documents.", workCardBtn:"View Demo",
+        activityTitle:"Select Activity Type", activitySub:"Choose an activity to experience the custom booking form",
+        bookingTitle:"Enter Booking Details", bookingSub:"Please complete the details to confirm your appointment for:",
+        fullName:"Full Name", phone:"Phone Number", phone2:"Alternative Phone", date:"Date", time:"Time", message:"Additional Notes",
+        namePh:"At least two words", phonePh:"e.g., 01xxxxxxxxx", msgPh:"Write any notes here...",
+        nameErr:"Full name required", phoneErr:"Must be 11 digits", dateErr:"Date required", timeErr:"Time required",
+        submit:"Confirm Booking", back:"Back to Activities", newBooking:"Make New Booking", sendWa:"WhatsApp Contact",
+        progressTitle:"Processing request...", confirmTitle:"Booking Confirmed!", confirmSub:"Your data is saved. Here are the details:",
+        bookingId:"Reference ID", activityLabel:"Activity", failText:"Saved locally.", duplicateSlot:"Sorry, this slot just got booked.", duplicateBooking:"Already Booked", duplicateNote:"You already have a booking with this phone number.",
+        holidayTitle:"Holiday", holidayText:"This day is not available for booking.", holidayBtn:"OK",
+        copied:"Copied!", copyLabel:"Copy", emailDemo:"Receipt Email (Optional)",
+        adminSearch:"Search...", allStatuses:"All Statuses", statusNew:"New", statusConfirmed:"Confirmed", statusCanceled:"Canceled", statusDuplicate:"Duplicate",
+        exportCsv:"Export CSV", clearDemo:"Clear Demo", noRows:"No bookings found.", total:"Total", today:"Today", confirmed:"Confirmed",
+        adminUser:"Username", adminPass:"Password", adminLogin:"Login", adminLogout:"Logout", adminLoginHint:"Demo credentials: ADMIN / ADMIN", adminLoginError:"Invalid credentials", missingFields:"Please fill required fields",
+        testimonialsTitle:"Partner Reviews"
+    }
+};
+
+const featuresData = {
+    ar: [
+        ["fa-bolt", "أداء فائق السرعة", "تجاوب لحظي مع اختيارات العميل لضمان تجربة مستخدم سلسة."],
+        ["fa-calendar-check", "إدارة ذكية للمواعيد", "منع الحجز المزدوج وتعطيل المواعيد المحجوزة تلقائياً."],
+        ["fa-mobile-screen", "تصميم متجاوب بالكامل", "واجهة عصرية تتكيف بشكل مثالي مع كافة الشاشات والأجهزة."],
+        ["fa-shield-halved", "أمان وحماية", "فلترة مدخلات المستخدمين لضمان بيئة عمل آمنة ومستقرة."],
+        ["fa-chart-pie", "لوحة تحكم شاملة", "إدارة سهلة للحجوزات مع خيارات فلترة، وتصدير التقارير."],
+        ["fa-palette", "تخصيص الهوية", "دعم كامل للوضع الليلي والنهاري مع إمكانية تغيير الألوان."]
+    ],
+    en: [
+        ["fa-bolt", "Lightning Fast", "Instant response to client actions for a seamless UX."],
+        ["fa-calendar-check", "Smart Scheduling", "Prevents double booking and auto-disables booked slots."],
+        ["fa-mobile-screen", "Fully Responsive", "Modern interface adapting perfectly to all devices."],
+        ["fa-shield-halved", "Secure & Safe", "Input filtering ensuring a stable and secure environment."],
+        ["fa-chart-pie", "Comprehensive Dashboard", "Easy management with filtering and report exports."],
+        ["fa-palette", "Brand Customization", "Full light/dark mode support with dynamic color themes."]
+    ]
+};
+
+const testimonialsData = {
+    ar: [
+        { name:"أحمد منصور", role:"مدير تشغيل", text:"الواجهة الجديدة فرقت معانا جداً في سرعة تسجيل العملاء لمواعيدهم بدون أخطاء." },
+        { name:"د. سارة كمال", role:"صاحبة عيادة", text:"النظام منظم جداً ولوحة الإدارة خلت المتابعة اليومية من الموبايل سهلة ومريحة." },
+        { name:"عميل تجربة", role:"مستخدم", text:"عملية الحجز واضحة ومباشرة، وتقسيم الأوقات بيطمن إن الميعاد فعلاً متاح." }
+    ],
+    en: [
+        { name:"Ahmed Mansour", role:"Operations Mgr", text:"The new interface drastically improved our clients' booking speed with zero errors." },
+        { name:"Dr. Sarah Kamal", role:"Clinic Owner", text:"Very organized system. The admin panel makes daily mobile tracking effortless." },
+        { name:"Demo Client", role:"User", text:"Booking process is clear and direct. Time slot division ensures real availability." }
+    ]
+};
+
+function t(key) { return (dict[currentLang] && dict[currentLang][key]) || key; }
+function escapeHTML(str) { return String(str ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#039;" }[c])); }
+
+function saveToStorage(k, v) { try { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); } catch(e){} }
+function loadFromStorage(k, f) { try { const v = localStorage.getItem(STORE_PREFIX + k); return v ? JSON.parse(v) : f; } catch(e){ return f; } }
+function getBookings() { return loadFromStorage("data", []); }
+function setBookings(arr) { saveToStorage("data", arr); renderAdminPanel(); }
+
+function showToast(msg, type = "info") {
+    const c = document.getElementById("toastContainer");
+    const t = document.createElement("div");
+    t.className = `toast ${type}`;
+    const icon = type === "success" ? "fa-check-circle" : type === "error" ? "fa-circle-exclamation" : "fa-info-circle";
+    t.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${escapeHTML(msg)}</span>`;
+    c.appendChild(t);
+    setTimeout(() => { t.classList.add("hiding"); setTimeout(() => t.remove(), 300); }, 3000);
+}
+
+function copyToClipboard(txt, btn) {
+    navigator.clipboard.writeText(txt).then(() => {
+        showToast(t("copied"), "success");
+        if(btn) { const old = btn.innerHTML; btn.innerHTML = `<i class="fa-solid fa-check"></i>`; setTimeout(()=>btn.innerHTML=old, 1500); }
     });
-  </script>
+}
+function copyClientLink(btn) { copyToClipboard(location.href.split("#")[0] + "#booking", btn); }
+
+function toggleLanguage() {
+    currentLang = currentLang === "ar" ? "en" : "ar";
+    saveToStorage("lang", currentLang);
+    applyLanguage();
+}
+
+function toggleDarkMode() {
+    const isDark = document.documentElement.getAttribute("data-mode") === "dark";
+    const next = isDark ? "light" : "dark";
+    document.documentElement.setAttribute("data-mode", next);
+    document.getElementById("darkBtn").innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    saveToStorage("mode", next);
+}
+
+function toggleMobileMenu() { document.getElementById("mobileMenu").classList.toggle("show"); }
+function togglePaletteMenu() { document.getElementById("paletteMenu").classList.toggle("show"); }
+function setPalette(name) {
+    if(name === "default") document.documentElement.removeAttribute("data-palette");
+    else document.documentElement.setAttribute("data-palette", name);
+    saveToStorage("palette", name);
+    document.getElementById("paletteMenu").classList.remove("show");
+}
+
+function applyLanguage() {
+    document.documentElement.lang = currentLang;
+    document.documentElement.setAttribute("data-lang", currentLang);
+    document.body.classList.toggle("en-mode", currentLang === "en");
+    document.getElementById("langText").innerText = currentLang === "ar" ? "EN" : "AR";
+    document.querySelectorAll("[data-i18n]").forEach(el => el.innerHTML = t(el.getAttribute("data-i18n")));
+    document.getElementById("holidayTitle").innerText = t("holidayTitle");
+    document.getElementById("holidayText").innerText = t("holidayText");
+    document.getElementById("holidayBtn").innerText = t("holidayBtn");
+    renderFeatures();
+    renderTestimonials();
+    if (document.getElementById("pName")) renderBookingForm();
+    else renderActivityStep();
+    renderAdminPanel();
+}
+
+function renderFeatures() {
+    document.getElementById("featuresGrid").innerHTML = featuresData[currentLang].map(item => `
+        <div class="feature-card reveal">
+            <div class="feature-icon"><i class="fa-solid ${item[0]}"></i></div>
+            <h3>${item[1]}</h3>
+            <p>${item[2]}</p>
+        </div>
+    `).join("");
+}
+
+function renderTestimonials() {
+    document.getElementById("testimonialsGrid").innerHTML = testimonialsData[currentLang].map(item => `
+        <div class="testimonial-card reveal">
+            <div class="client-info">
+                <div class="client-avatar">${item.name.charAt(0)}</div>
+                <div class="client-details">
+                    <strong>${item.name}</strong>
+                    <span>${item.role}</span>
+                </div>
+            </div>
+            <p style="color:var(--text-soft); font-weight:500;">"${item.text}"</p>
+        </div>
+    `).join("");
+}
+
+function goToBookingDemo() {
+    renderActivityStep();
+    document.getElementById("booking").scrollIntoView();
+}
+
+function renderActivityStep() {
+    selectedTime = "";
+    bookingStage.innerHTML = `
+        <div class="booking-header">
+            <h2>${t("activityTitle")}</h2>
+            <p>${t("activitySub")}</p>
+        </div>
+        <div class="booking-body">
+            <div class="activity-grid">
+                ${activitiesList.map(act => `
+                    <div class="act-card" onclick="selectActivity('${act.id}')">
+                        <i class="fa-solid ${act.icon}"></i>
+                        <span>${act[currentLang]}</span>
+                    </div>
+                `).join("")}
+            </div>
+        </div>
+    `;
+}
+
+function selectActivity(id) {
+    const act = activitiesList.find(a => a.id === id);
+    selectedActivityId = act.id;
+    selectedActivityName = act[currentLang];
+    selectedTime = "";
+    renderBookingForm();
+}
+
+function bookedTimesFor(date) {
+    return getBookings().filter(r => r.date === date && r.activityId === selectedActivityId && r.status !== "canceled").map(r => r.time);
+}
+
+function renderTimeSlots(date) {
+    const wrap = document.getElementById("slotWrap");
+    if (!wrap) return;
+    const booked = bookedTimesFor(date);
+    wrap.innerHTML = timeSlots.map(s => `
+        <button class="slot-btn ${selectedTime === s ? "selected" : ""}" ${booked.includes(s) ? "disabled" : ""} onclick="chooseTime('${s}')">${s}</button>
+    `).join("");
+}
+
+function chooseTime(slot) {
+    selectedTime = slot;
+    document.getElementById("timeGrp").classList.remove("error");
+    renderTimeSlots(document.getElementById("pDate").value);
+}
+
+function renderBookingForm() {
+    const today = new Date().toISOString().split("T")[0];
+    bookingStage.innerHTML = `
+        <div class="booking-header">
+            <h2>${t("bookingTitle")}</h2>
+            <p>${t("bookingSub")} <strong>${selectedActivityName}</strong></p>
+        </div>
+        <div class="booking-body">
+            <div class="info-alert">
+                <div><i class="fa-solid fa-circle-info"></i> الإحصائيات النشطة:</div>
+                <div><span class="badge primary">${getBookings().length + 150} حجز مسجل</span></div>
+            </div>
+            <div class="form-grid">
+                <div class="field-group" id="nameGrp">
+                    <label>${t("fullName")}</label>
+                    <input type="text" id="pName" placeholder="${t("namePh")}" oninput="this.parentElement.classList.remove('error')">
+                    <div class="error-msg">${t("nameErr")}</div>
+                </div>
+                <div class="form-row">
+                    <div class="field-group" id="phoneGrp">
+                        <label>${t("phone")}</label>
+                        <input type="tel" id="pPhone" maxlength="11" placeholder="${t("phonePh")}" oninput="this.value=this.value.replace(/\\D/g,''); this.parentElement.classList.remove('error');">
+                        <div class="error-msg">${t("phoneErr")}</div>
+                    </div>
+                    <div class="field-group">
+                        <label>${t("date")}</label>
+                        <input type="date" id="pDate" min="${today}" onkeydown="return false" onchange="validateDate(this)">
+                        <div class="error-msg" id="dateErr">${t("dateErr")}</div>
+                    </div>
+                </div>
+                <div class="field-group" id="timeGrp">
+                    <label>${t("time")}</label>
+                    <div class="time-slots" id="slotWrap"></div>
+                    <div class="error-msg">${t("timeErr")}</div>
+                </div>
+                <div class="field-group">
+                    <label>${t("message")}</label>
+                    <textarea id="pMessage" placeholder="${t("msgPh")}"></textarea>
+                </div>
+                <div class="field-group demo-box">
+                    <label style="color:var(--primary);"><i class="fa-solid fa-envelope"></i> ${t("emailDemo")}</label>
+                    <input type="email" id="pEmail" placeholder="user@example.com" style="background:var(--bg-surface);">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline" onclick="renderActivityStep()">${t("back")}</button>
+                    <button class="btn btn-primary" onclick="submitBooking()">${t("submit")} <i class="fa-solid fa-check"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
+    renderTimeSlots("");
+}
+
+function validateDate(el) {
+    selectedTime = "";
+    if(!el.value) return;
+    if(new Date(el.value).getDay() === 5) {
+        el.value = "";
+        document.getElementById("holidayModal").classList.add("show");
+        renderTimeSlots("");
+        return;
+    }
+    el.parentElement.classList.remove("error");
+    renderTimeSlots(el.value);
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove("show"); }
+
+function submitBooking() {
+    const name = document.getElementById("pName").value.trim();
+    const phone = document.getElementById("pPhone").value.trim();
+    const date = document.getElementById("pDate").value;
+    const msg = document.getElementById("pMessage").value.trim();
+    const email = document.getElementById("pEmail").value.trim();
+
+    let err = false;
+    if(name.split(/\s+/).length < 2) { document.getElementById("nameGrp").classList.add("error"); err = true; }
+    if(phone.length < 11) { document.getElementById("phoneGrp").classList.add("error"); err = true; }
+    if(!date) { document.getElementById("pDate").parentElement.classList.add("error"); err = true; }
+    if(!selectedTime) { document.getElementById("timeGrp").classList.add("error"); err = true; }
+
+    if(err) { showToast(t("missingFields"), "error"); return; }
+    
+    if(bookedTimesFor(date).includes(selectedTime)) { showToast(t("duplicateSlot"), "error"); renderTimeSlots(date); return; }
+
+    const isDup = getBookings().some(r => r.phone === phone && r.status !== "canceled" && r.status !== "duplicate");
+    
+    const row = {
+        id: "RSV-" + Math.floor(Math.random() * 90000 + 10000),
+        status: isDup ? "duplicate" : "new",
+        name, phone, date, time: selectedTime, activity: selectedActivityName, activityId: selectedActivityId, message: msg, email, duplicate: isDup
+    };
+
+    bookingStage.innerHTML = `
+        <div class="booking-body" style="text-align:center; padding:80px 20px;">
+            <i class="fa-solid fa-circle-notch fa-spin result-icon" style="color:var(--primary);"></i>
+            <h2>${t("progressTitle")}</h2>
+        </div>
+    `;
+
+    setTimeout(() => {
+        const rows = getBookings();
+        rows.unshift(row);
+        setBookings(rows);
+        renderSuccess(row);
+    }, 1500);
+}
+
+function renderSuccess(row) {
+    const waText = encodeURIComponent(`طلب حجز:\nالرقم: ${row.id}\nالنشاط: ${row.activity}\nالاسم: ${row.name}\nالهاتف: ${row.phone}\nالتاريخ: ${row.date}\nالوقت: ${row.time}`);
+    const title = row.duplicate ? t("duplicateBooking") : t("confirmTitle");
+    const sub = row.duplicate ? t("duplicateNote") : t("confirmSub");
+    const icon = row.duplicate ? "fa-circle-exclamation warning" : "fa-circle-check success";
+    
+    bookingStage.innerHTML = `
+        <div class="booking-body result-card">
+            <i class="fa-solid ${icon} result-icon"></i>
+            <h2>${title}</h2>
+            <p style="color:var(--text-soft);">${sub}</p>
+            
+            <div class="details-list">
+                <div class="detail-row"><span>${t("bookingId")}</span> <strong>${row.id}</strong></div>
+                <div class="detail-row"><span>${t("fullName")}</span> <strong>${escapeHTML(row.name)}</strong></div>
+                <div class="detail-row"><span>${t("phone")}</span> <strong style="direction:ltr;">${escapeHTML(row.phone)}</strong></div>
+                <div class="detail-row"><span>${t("activityLabel")}</span> <strong>${escapeHTML(row.activity)}</strong></div>
+                <div class="detail-row"><span>${t("date")}</span> <strong>${row.date}</strong></div>
+                <div class="detail-row"><span>${t("time")}</span> <strong>${row.time}</strong></div>
+            </div>
+
+            <div class="form-actions">
+                <a class="btn btn-outline" href="https://wa.me/${ADMIN_WHATSAPP}?text=${waText}" target="_blank" style="color:#25d366; border-color:#25d366;"><i class="fa-brands fa-whatsapp"></i> ${t("sendWa")}</a>
+                <button class="btn btn-primary" onclick="renderActivityStep()">${t("newBooking")}</button>
+            </div>
+        </div>
+    `;
+    document.getElementById("booking").scrollIntoView();
+}
+
+function renderAdminPanel() {
+    if (!adminAuthed) {
+        adminPanel.innerHTML = `
+            <div class="admin-login">
+                <h3><i class="fa-solid fa-user-shield"></i> ${t("adminLogin")}</h3>
+                <p style="color:var(--text-soft); font-size:0.9rem; margin-bottom:25px;">${t("adminLoginHint")}</p>
+                <div class="form-grid" style="text-align:right;">
+                    <div class="field-group">
+                        <label>${t("adminUser")}</label>
+                        <input type="text" id="aUser" placeholder="ADMIN">
+                    </div>
+                    <div class="field-group">
+                        <label>${t("adminPass")}</label>
+                        <input type="password" id="aPass" placeholder="ADMIN" onkeydown="if(event.key==='Enter') loginAdmin()">
+                    </div>
+                    <button class="btn btn-primary" style="margin-top:10px;" onclick="loginAdmin()">${t("adminLogin")}</button>
+                </div>
+            </div>
+        `;
+        return;
+    }
+    
+    const rows = getBookings();
+    const q = (loadFromStorage("admQ","") || "").toLowerCase();
+    const stat = loadFromStorage("admS","");
+    const filtered = rows.filter(r => (!q || `${r.id} ${r.name} ${r.phone}`.toLowerCase().includes(q)) && (!stat || r.status === stat));
+
+    adminPanel.innerHTML = `
+        <div class="admin-toolbar">
+            <input placeholder="${t("adminSearch")}" value="${escapeHTML(q)}" oninput="saveToStorage('admQ', this.value); renderAdminPanel();">
+            <select onchange="saveToStorage('admS', this.value); renderAdminPanel();">
+                <option value="">${t("allStatuses")}</option>
+                <option value="new" ${stat==="new"?"selected":""}>${t("statusNew")}</option>
+                <option value="confirmed" ${stat==="confirmed"?"selected":""}>${t("statusConfirmed")}</option>
+                <option value="canceled" ${stat==="canceled"?"selected":""}>${t("statusCanceled")}</option>
+                <option value="duplicate" ${stat==="duplicate"?"selected":""}>${t("statusDuplicate")}</option>
+            </select>
+            <button class="btn btn-outline" style="height:auto; padding:8px 15px;" onclick="setBookings([])"><i class="fa-solid fa-trash"></i> مسح</button>
+            <button class="btn btn-outline" style="height:auto; padding:8px 15px;" onclick="adminAuthed=false; renderAdminPanel();"><i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>${t("bookingId")}</th><th>${t("fullName")}</th><th>${t("phone")}</th><th>${t("activityLabel")}</th>
+                        <th>التاريخ/الوقت</th><th>الحالة</th><th>إجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${filtered.length ? filtered.map(r => `
+                        <tr>
+                            <td><strong>${r.id}</strong></td>
+                            <td>${escapeHTML(r.name)}</td>
+                            <td style="direction:ltr; text-align:${currentLang==='ar'?'right':'left'};">${escapeHTML(r.phone)}</td>
+                            <td>${escapeHTML(r.activity)}</td>
+                            <td>${r.date} <br><span style="color:var(--text-soft);">${r.time}</span></td>
+                            <td>
+                                <select class="status-select" onchange="updateRowStat('${r.id}', this.value)">
+                                    <option value="new" ${r.status==="new"?"selected":""}>${t("statusNew")}</option>
+                                    <option value="confirmed" ${r.status==="confirmed"?"selected":""}>${t("statusConfirmed")}</option>
+                                    <option value="canceled" ${r.status==="canceled"?"selected":""}>${t("statusCanceled")}</option>
+                                    <option value="duplicate" ${r.status==="duplicate"?"selected":""}>${t("statusDuplicate")}</option>
+                                </select>
+                            </td>
+                            <td><a href="https://wa.me/${ADMIN_WHATSAPP}" target="_blank" class="wa-link"><i class="fa-brands fa-whatsapp"></i></a></td>
+                        </tr>
+                    `).join("") : `<tr><td colspan="7" style="text-align:center; padding:40px; color:var(--text-soft);">${t("noRows")}</td></tr>`}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function loginAdmin() {
+    if(document.getElementById("aUser").value.toUpperCase() === "ADMIN" && document.getElementById("aPass").value.toUpperCase() === "ADMIN") {
+        adminAuthed = true; renderAdminPanel(); showToast("تم تسجيل الدخول", "success");
+    } else { showToast(t("adminLoginError"), "error"); }
+}
+
+function updateRowStat(id, s) {
+    setBookings(getBookings().map(r => r.id === id ? {...r, status:s} : r));
+    showToast("تم التحديث", "success");
+}
+
+function updateClock() {
+    const d = new Date();
+    document.getElementById("liveClock").innerText = d.toLocaleTimeString(currentLang==="ar"?"ar-EG":"en-US", {hour:"2-digit", minute:"2-digit"});
+    document.getElementById("liveDate").innerText = d.toLocaleDateString(currentLang==="ar"?"ar-EG":"en-US", {weekday:"long", day:"numeric", month:"long"});
+}
+
+function animateStats() {
+    if(statsAnimated) return; statsAnimated = true;
+    let n=0; const t1=34, t2=2450, t3=18;
+    const i = setInterval(() => {
+        n++;
+        document.getElementById("stat1").innerText = "+" + Math.min(n*2, t1);
+        document.getElementById("stat2").innerText = "+" + Math.min(n*150, t2);
+        document.getElementById("stat3").innerText = "+" + Math.min(n, t3);
+        if(n*150 >= t2) clearInterval(i);
+    }, 30);
+}
+
+window.addEventListener("scroll", () => {
+    document.getElementById("scrollProgress").style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100 + "%";
+    document.getElementById("backToTop").classList.toggle("visible", scrollY > 400);
+    
+    document.querySelectorAll(".reveal").forEach(el => {
+        if(el.getBoundingClientRect().top < innerHeight - 50) el.classList.add("active");
+    });
+});
+
+window.addEventListener("load", () => {
+    currentLang = loadFromStorage("lang", "ar");
+    const mode = loadFromStorage("mode", "light");
+    const pal = loadFromStorage("palette", "default");
+    
+    document.documentElement.setAttribute("data-mode", mode);
+    if(pal !== "default") document.documentElement.setAttribute("data-palette", pal);
+    document.getElementById("darkBtn").innerHTML = mode === "dark" ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    
+    applyLanguage();
+    setInterval(updateClock, 1000); updateClock();
+    setTimeout(() => { document.getElementById("splash").classList.add("hide"); animateStats(); document.querySelectorAll(".reveal").forEach(e=>e.classList.add("active")); }, 1200);
+});
+
+function scrollToTop() { window.scrollTo(0,0); }
+</script>
 </body>
 </html>
